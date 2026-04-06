@@ -3,10 +3,52 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Java Grade 12 IEB — Visual Study Guide</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
+
+
+@page {
+  size: A4;
+  margin: 20mm;
+}
+
+.print-container {
+  max-width: 180mm;
+  margin: auto;
+}
+
+/* Normal styles stay as is */
+
+/* PRINT STYLES */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 12pt;
+    margin: 0;
+  }
+
+  /* Hide unwanted stuff */
+  nav, footer, button, .no-print {
+    display: none !important;
+  }
+
+  /* Full width layout */
+  .container, body {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
+  /* Prevent awkward splits */
+  section, .card {
+    page-break-inside: avoid;
+  }
+}
+
 /* ═══════════════════════════════════════
    ROOT / TOKENS
    
@@ -397,9 +439,13 @@ code{
   margin:22px 0;border-left:5px solid;
 }
 
+
 </style>
 </head>
 <body>
+   <div class="print-container">
+    <!-- ALL your content here -->
+ 
 
 <div id="prog"></div>
 
@@ -1768,6 +1814,9 @@ const io = new IntersectionObserver(entries => {
   });
 }, { rootMargin: '-20% 0px -70% 0px' });
 sections.forEach(s => io.observe(s));
+
 </script>
+<button onclick="window.print()">Download as PDF</button>
+ </div>
 </body>
 </html>
