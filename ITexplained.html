@@ -1,0 +1,1772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Java Grade 12 IEB — Visual Study Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   ROOT / TOKENS
+═══════════════════════════════════════ */
+:root{
+  --cream:#FFFDF7;
+  --ink:#1A1A2E;
+  --ink2:#4A4A6A;
+  --border:#E2DED6;
+  --c1:#3B6FEB;   /* OOP        – blue    */
+  --c2:#0BAD7A;   /* Classes    – emerald */
+  --c3:#7C3AED;   /* Inherit    – violet  */
+  --c4:#D97706;   /* Methods    – amber   */
+  --c5:#DC2626;   /* Arrays     – red     */
+  --c6:#0891B2;   /* ArrObjects – cyan    */
+  --c7:#4F46E5;   /* Loops      – indigo  */
+  --c8:#EA580C;   /* Switch     – orange  */
+  --c9:#0284C7;   /* Math       – sky     */
+  --c10:#DB2777;  /* Strings    – pink    */
+  --good:#059669;
+  --bad:#DC2626;
+  --warn-bg:#FFFBEB;
+  --warn-border:#FCD34D;
+  --tip-bg:#F0FDF4;
+  --tip-border:#86EFAC;
+  --exam-bg:#EFF6FF;
+  --exam-border:#93C5FD;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+
+body{
+  background:var(--cream);
+  color:var(--ink);
+  font-family:'DM Sans',system-ui,sans-serif;
+  font-size:16px;
+  line-height:1.7;
+}
+
+/* ═══════════════════════════════════════
+   TOP NAV
+═══════════════════════════════════════ */
+#topnav{
+  position:sticky;top:0;z-index:200;
+  background:rgba(255,253,247,0.92);
+  backdrop-filter:blur(8px);
+  border-bottom:2px solid var(--border);
+  padding:0 28px;
+  display:flex;align-items:center;gap:6px;
+  overflow-x:auto;
+  white-space:nowrap;
+}
+#topnav::-webkit-scrollbar{height:0;}
+.tnav-brand{
+  font-family:'Fraunces',serif;
+  font-size:1rem;font-weight:900;
+  color:var(--ink);
+  padding:12px 16px 12px 0;
+  border-right:2px solid var(--border);
+  margin-right:6px;
+  flex-shrink:0;
+}
+#topnav a{
+  font-size:0.75rem;font-weight:600;
+  text-decoration:none;color:var(--ink2);
+  padding:8px 10px;border-radius:6px;
+  transition:all .15s;flex-shrink:0;
+}
+#topnav a:hover{background:var(--border);color:var(--ink);}
+
+/* progress bar */
+#prog{height:3px;background:var(--c1);position:fixed;top:0;left:0;z-index:300;transition:width .1s;}
+
+/* ═══════════════════════════════════════
+   HERO
+═══════════════════════════════════════ */
+.hero{
+  padding:72px 60px 64px;
+  max-width:900px;margin:0 auto;
+}
+.hero-tag{
+  display:inline-block;
+  background:var(--ink);color:#fff;
+  font-size:0.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  padding:4px 12px;border-radius:4px;margin-bottom:20px;
+}
+.hero h1{
+  font-family:'Fraunces',serif;
+  font-size:clamp(2.4rem,5vw,4rem);
+  font-weight:900;line-height:1.1;
+  margin-bottom:18px;
+}
+.hero h1 em{font-style:normal;color:var(--c1);}
+.hero-sub{color:var(--ink2);font-size:1.05rem;max-width:520px;margin-bottom:36px;}
+
+.pill-row{display:flex;flex-wrap:wrap;gap:8px;}
+.pill{
+  padding:6px 14px;border-radius:999px;
+  font-size:0.78rem;font-weight:600;
+  border:2px solid;
+}
+
+/* ═══════════════════════════════════════
+   SECTION WRAPPER
+═══════════════════════════════════════ */
+.section{
+  padding:70px 60px;
+  max-width:900px;margin:0 auto;
+  scroll-margin-top:52px;
+}
+
+.sec-label{
+  display:flex;align-items:center;gap:14px;
+  margin-bottom:30px;
+}
+.sec-num{
+  width:46px;height:46px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Fraunces',serif;font-size:1.1rem;font-weight:900;
+  color:#fff;flex-shrink:0;
+}
+.sec-title{
+  font-family:'Fraunces',serif;
+  font-size:2rem;font-weight:900;line-height:1.15;
+}
+.sec-title small{
+  display:block;font-family:'DM Sans',sans-serif;
+  font-size:0.75rem;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink2);margin-bottom:2px;
+}
+
+.sec-divider{
+  border:none;
+  border-top:2px solid var(--border);
+  margin:60px 0;
+}
+
+p{margin-bottom:12px;}
+
+/* ═══════════════════════════════════════
+   STEP BOXES (numbered steps)
+═══════════════════════════════════════ */
+.steps{display:flex;flex-direction:column;gap:0;}
+.step{
+  display:flex;gap:18px;
+  padding:20px 0;
+  border-bottom:1px dashed var(--border);
+}
+.step:last-child{border-bottom:none;}
+.step-num{
+  width:34px;height:34px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:0.9rem;color:#fff;
+  flex-shrink:0;margin-top:2px;
+}
+.step-body h4{font-size:1rem;font-weight:700;margin-bottom:4px;}
+.step-body p{margin:0;font-size:0.93rem;color:var(--ink2);}
+
+/* ═══════════════════════════════════════
+   VISUAL DIAGRAM BOXES
+═══════════════════════════════════════ */
+.diagram{
+  background:#fff;
+  border:2px solid var(--border);
+  border-radius:14px;
+  padding:28px;
+  margin:22px 0;
+  overflow-x:auto;
+}
+.diagram-title{
+  font-size:0.72rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink2);margin-bottom:18px;
+}
+
+/* 4-pillar grid */
+.pillars{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
+.pillar{border-radius:12px;padding:20px;border-left:4px solid;}
+.pillar h3{font-size:1rem;font-weight:700;margin-bottom:6px;}
+.pillar p{font-size:0.88rem;margin:0;}
+
+/* class anatomy diagram */
+.class-box{
+  border:3px solid var(--c2);
+  border-radius:12px;overflow:hidden;
+  font-family:'JetBrains Mono',monospace;font-size:0.82rem;
+  max-width:420px;margin:0 auto;
+}
+.class-box-header{
+  background:var(--c2);color:#fff;
+  padding:10px 18px;font-weight:700;font-size:0.9rem;
+  display:flex;align-items:center;gap:10px;
+}
+.class-section{padding:14px 18px;border-top:1px solid #E2DED6;}
+.class-section-label{
+  font-size:0.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  margin-bottom:8px;
+}
+.class-row{padding:4px 0;color:var(--ink2);}
+.class-row .tag{
+  display:inline-block;font-size:0.65rem;font-weight:700;
+  padding:1px 6px;border-radius:3px;margin-right:6px;vertical-align:middle;
+}
+
+/* inheritance tree */
+.inherit-tree{display:flex;flex-direction:column;align-items:center;gap:0;}
+.inode{
+  border:2.5px solid;border-radius:10px;
+  padding:12px 28px;font-weight:700;font-size:0.95rem;text-align:center;
+  position:relative;min-width:160px;
+}
+.inode-sub{font-size:0.75rem;font-weight:400;opacity:.7;margin-top:2px;}
+.arrow-down{
+  width:2px;height:36px;
+  background:var(--border);
+  margin:0 auto;position:relative;
+}
+.arrow-down::after{
+  content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  border:7px solid transparent;border-top-color:var(--border);
+}
+.irow{display:flex;gap:24px;align-items:flex-start;justify-content:center;}
+.ibranch{display:flex;flex-direction:column;align-items:center;}
+
+/* array visual */
+.arr-visual{display:flex;gap:3px;align-items:flex-end;flex-wrap:wrap;}
+.arr-cell{
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+}
+.arr-box{
+  width:54px;height:46px;border:2px solid;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1rem;
+}
+.arr-idx{font-size:0.68rem;font-weight:600;color:var(--ink2);}
+.arr-label{font-size:0.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2);margin-bottom:4px;}
+
+/* string visual */
+.str-visual{display:flex;gap:2px;flex-wrap:wrap;align-items:flex-end;}
+.str-cell{display:flex;flex-direction:column;align-items:center;gap:3px;}
+.str-box{
+  width:40px;height:40px;border:2px solid;border-radius:6px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1rem;
+}
+.str-idx{font-size:0.65rem;color:var(--ink2);font-weight:600;}
+
+/* ═══════════════════════════════════════
+   FLOWCHARTS (SVG)
+═══════════════════════════════════════ */
+.flow-wrap{
+  background:#fff;border:2px solid var(--border);
+  border-radius:14px;padding:24px;margin:22px 0;
+  display:flex;flex-direction:column;align-items:center;
+  overflow-x:auto;
+}
+.flow-title{
+  font-size:0.72rem;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink2);
+  margin-bottom:18px;align-self:flex-start;
+}
+svg.flow{overflow:visible;}
+
+/* ═══════════════════════════════════════
+   CODE BLOCKS
+═══════════════════════════════════════ */
+.code-wrap{
+  border-radius:12px;overflow:hidden;
+  border:2px solid #1A1A2E;
+  margin:18px 0;
+}
+.code-head{
+  background:#1A1A2E;color:#aaa;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 18px;
+  font-family:'JetBrains Mono',monospace;font-size:0.7rem;
+}
+.code-head .badge{
+  background:#3B6FEB;color:#fff;
+  font-size:0.62rem;font-weight:700;letter-spacing:.08em;
+  padding:2px 8px;border-radius:3px;
+}
+.code-wrap pre{
+  background:#0F1117;
+  padding:20px 22px;overflow-x:auto;
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.81rem;line-height:1.75;color:#CDD9E5;
+}
+.code-wrap pre::-webkit-scrollbar{height:4px;}
+.code-wrap pre::-webkit-scrollbar-thumb{background:#333;}
+
+/* syntax */
+.kw {color:#E06C75;font-weight:600;}
+.tp {color:#61AFEF;}
+.st {color:#98C379;}
+.cm {color:#5C6370;font-style:italic;}
+.nm {color:#D19A66;}
+.mt {color:#61DAFB;}
+.cl {color:#E5C07B;}
+.an {color:#5C6370;}
+
+/* ═══════════════════════════════════════
+   CALLOUTS
+═══════════════════════════════════════ */
+.callout{
+  border-radius:10px;padding:16px 20px;
+  display:flex;gap:12px;margin:18px 0;
+  font-size:0.92rem;
+}
+.callout-icon{font-size:1.3rem;flex-shrink:0;margin-top:1px;}
+.callout.tip   {background:var(--tip-bg);border:1.5px solid var(--tip-border);}
+.callout.warn  {background:var(--warn-bg);border:1.5px solid var(--warn-border);}
+.callout.exam  {background:var(--exam-bg);border:1.5px solid var(--exam-border);}
+.callout-body strong{display:block;margin-bottom:3px;font-size:0.88rem;}
+
+/* ═══════════════════════════════════════
+   COMPARISON TABLE
+═══════════════════════════════════════ */
+.ref-table{width:100%;border-collapse:collapse;margin:18px 0;font-size:0.88rem;}
+.ref-table th{
+  background:var(--ink);color:#fff;
+  padding:10px 14px;text-align:left;
+  font-size:0.75rem;letter-spacing:.06em;text-transform:uppercase;
+}
+.ref-table td{
+  padding:9px 14px;border-bottom:1px solid var(--border);vertical-align:top;
+}
+.ref-table tr:nth-child(even) td{background:#F7F5F0;}
+.ref-table td:first-child{
+  font-family:'JetBrains Mono',monospace;font-size:0.79rem;
+  color:#7C3AED;font-weight:600;
+}
+.ref-table td:nth-child(3){
+  font-family:'JetBrains Mono',monospace;font-size:0.79rem;color:#059669;
+}
+
+/* ═══════════════════════════════════════
+   GOOD / BAD COMPARE
+═══════════════════════════════════════ */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0;}
+.compare-box{border-radius:10px;overflow:hidden;border:2px solid;}
+.compare-head{
+  padding:8px 16px;font-size:0.78rem;font-weight:700;
+  letter-spacing:.06em;text-transform:uppercase;
+}
+.compare-body pre{
+  background:#0F1117;color:#CDD9E5;
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.78rem;line-height:1.7;
+  padding:14px 16px;margin:0;overflow-x:auto;
+}
+
+/* good */
+.compare-box.good{border-color:var(--good);}
+.compare-box.good .compare-head{background:var(--good);color:#fff;}
+
+/* bad */
+.compare-box.bad{border-color:var(--bad);}
+.compare-box.bad .compare-head{background:var(--bad);color:#fff;}
+
+/* ═══════════════════════════════════════
+   SCROLL TOP BUTTON
+═══════════════════════════════════════ */
+#scrollTop{
+  position:fixed;bottom:28px;right:28px;
+  width:44px;height:44px;border-radius:50%;
+  background:var(--ink);color:#fff;
+  border:none;cursor:pointer;font-size:1.2rem;
+  display:none;align-items:center;justify-content:center;
+  box-shadow:0 4px 18px rgba(0,0,0,.2);
+  transition:transform .2s;z-index:300;
+}
+#scrollTop:hover{transform:scale(1.1);}
+
+code{
+  font-family:'JetBrains Mono',monospace;font-size:.82em;
+  background:#F0EDE8;border:1px solid var(--border);
+  border-radius:4px;padding:1px 6px;color:#7C3AED;
+}
+
+/* ═══════════════════════════════════════
+   HIGHLIGHT BOX
+═══════════════════════════════════════ */
+.highlight-box{
+  border-radius:12px;padding:22px 26px;
+  margin:22px 0;border-left:5px solid;
+}
+
+</style>
+</head>
+<body>
+
+<div id="prog"></div>
+
+<!-- TOP NAV -->
+<nav id="topnav">
+  <div class="tnav-brand">Java IEB ✦</div>
+  <a href="#oop">① OOP</a>
+  <a href="#classes">② Classes</a>
+  <a href="#inheritance">③ Inheritance</a>
+  <a href="#methods">④ Methods</a>
+  <a href="#arrays">⑤ Arrays</a>
+  <a href="#arrobj">⑥ Arr.Objects</a>
+  <a href="#loops">⑦ Loops</a>
+  <a href="#switch">⑧ Switch</a>
+  <a href="#math">⑨ Math</a>
+  <a href="#strings">⑩ Strings</a>
+</nav>
+
+<!-- ════════════════════════════════════════
+     HERO
+════════════════════════════════════════ -->
+<div class="hero">
+  <div class="hero-tag">Grade 12 · IEB Java · Visual Study Guide</div>
+  <h1>Learn Java<br><em>Step by Step.</em></h1>
+  <p class="hero-sub">Simple explanations, visual diagrams and flowcharts. Everything you need for your IEB exam — no fluff.</p>
+  <div class="pill-row">
+    <div class="pill" style="color:var(--c1);border-color:var(--c1);">① OOP</div>
+    <div class="pill" style="color:var(--c2);border-color:var(--c2);">② Classes</div>
+    <div class="pill" style="color:var(--c3);border-color:var(--c3);">③ Inheritance</div>
+    <div class="pill" style="color:var(--c4);border-color:var(--c4);">④ Methods</div>
+    <div class="pill" style="color:var(--c5);border-color:var(--c5);">⑤ Arrays</div>
+    <div class="pill" style="color:var(--c6);border-color:var(--c6);">⑥ Arr.Objects</div>
+    <div class="pill" style="color:var(--c7);border-color:var(--c7);">⑦ Loops</div>
+    <div class="pill" style="color:var(--c8);border-color:var(--c8);">⑧ Switch</div>
+    <div class="pill" style="color:var(--c9);border-color:var(--c9);">⑨ Math</div>
+    <div class="pill" style="color:var(--c10);border-color:var(--c10);">⑩ Strings</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+  ① OOP FUNDAMENTALS
+════════════════════════════════════════ -->
+<section class="section" id="oop">
+  <div class="sec-label">
+    <div class="sec-num" style="background:var(--c1)">1</div>
+    <div class="sec-title"><small>The Big Picture</small>OOP Fundamentals</div>
+  </div>
+
+  <p><strong>OOP stands for Object-Oriented Programming.</strong> Instead of writing one long list of instructions, you model your program as a collection of <strong>objects</strong> — things that have data and can do stuff.</p>
+  <p>Think of it like this: a <strong>Dog</strong> object has data (name, breed, age) and can do things (bark, fetch, eat). OOP lets you organise your code the same way.</p>
+
+  <!-- 4 PILLARS DIAGRAM -->
+  <div class="diagram">
+    <div class="diagram-title">📐 The 4 Pillars of OOP</div>
+    <div class="pillars">
+      <div class="pillar" style="background:#EFF6FF;border-color:var(--c1);">
+        <h3 style="color:var(--c1);">1. Encapsulation</h3>
+        <p>Bundle data and methods together. <strong>Hide the fields</strong> (make them private) so only the class itself can change them directly.</p>
+        <p style="margin-top:8px;font-size:0.82rem;color:var(--ink2);">🔒 Like a capsule that keeps medicine protected.</p>
+      </div>
+      <div class="pillar" style="background:#F0FDF4;border-color:var(--c2);">
+        <h3 style="color:var(--c2);">2. Abstraction</h3>
+        <p>Show only what is necessary. <strong>Hide the complex details</strong> — the user just calls a method without needing to know how it works inside.</p>
+        <p style="margin-top:8px;font-size:0.82rem;color:var(--ink2);">🎮 Like a TV remote — you press Power, you don't need to know the electronics.</p>
+      </div>
+      <div class="pillar" style="background:#F5F3FF;border-color:var(--c3);">
+        <h3 style="color:var(--c3);">3. Inheritance</h3>
+        <p>A child class <strong>inherits</strong> fields and methods from a parent class. Write shared code once, reuse it everywhere.</p>
+        <p style="margin-top:8px;font-size:0.82rem;color:var(--ink2);">👪 Like how children inherit traits from their parents.</p>
+      </div>
+      <div class="pillar" style="background:#FFFBEB;border-color:var(--c4);">
+        <h3 style="color:var(--c4);">4. Polymorphism</h3>
+        <p>The same method name can behave <strong>differently</strong> depending on the object it's called on.</p>
+        <p style="margin-top:8px;font-size:0.82rem;color:var(--ink2);">🐾 A Dog and a Cat both have <code>speak()</code> but one barks and one meows.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout exam">
+    <div class="callout-icon">⭐</div>
+    <div class="callout-body"><strong>IEB Exam: always apply encapsulation</strong> Make all fields <code>private</code>. Provide <code>public</code> getters and setters. If you forget this, you lose marks for every question that has a class.</div>
+  </div>
+</section>
+
+<hr class="sec-divider">
+
+<!-- ════════════════════════════════════════
+  ② CLASSES & OBJECTS
+════════════════════════════════════════ -->
+<section class="section" id="classes">
+  <div class="sec-label">
+    <div class="sec-num" style="background:var(--c2)">2</div>
+    <div class="sec-title"><small>Blueprint &amp; Instance</small>Classes &amp; Objects</div>
+  </div>
+
+  <p>A <strong>class</strong> is a blueprint. An <strong>object</strong> is a real thing built from that blueprint.</p>
+
+  <!-- ANALOGY -->
+  <div class="diagram" style="display:flex;align-items:center;gap:28px;flex-wrap:wrap;">
+    <div style="text-align:center;flex:1;min-width:160px;">
+      <div style="font-size:2.8rem;">📋</div>
+      <div style="font-weight:700;margin-top:6px;">Class</div>
+      <div style="font-size:0.85rem;color:var(--ink2);">The house plan<br>(blueprint)</div>
+    </div>
+    <div style="font-size:2rem;color:var(--border);">→</div>
+    <div style="text-align:center;flex:1;min-width:160px;">
+      <div style="font-size:2.8rem;">🏠</div>
+      <div style="font-weight:700;margin-top:6px;">Object 1</div>
+      <div style="font-size:0.85rem;color:var(--ink2);">5 Oak Ave<br>(red roof)</div>
+    </div>
+    <div style="text-align:center;flex:1;min-width:160px;">
+      <div style="font-size:2.8rem;">🏡</div>
+      <div style="font-weight:700;margin-top:6px;">Object 2</div>
+      <div style="font-size:0.85rem;color:var(--ink2);">12 Elm St<br>(blue roof)</div>
+    </div>
+    <div style="text-align:center;flex:1;min-width:160px;">
+      <div style="font-size:2.8rem;">🏘️</div>
+      <div style="font-weight:700;margin-top:6px;">Object 3</div>
+      <div style="font-size:0.85rem;color:var(--ink2);">3 Pine Rd<br>(grey roof)</div>
+    </div>
+  </div>
+
+  <p>Many objects can be made from the same class. They share the same <em>structure</em>, but have different <em>values</em>.</p>
+
+  <!-- CLASS ANATOMY DIAGRAM -->
+  <div class="diagram">
+    <div class="diagram-title">🔬 Anatomy of a Class</div>
+    <div class="class-box">
+      <div class="class-box-header">
+        <span>🟢</span>
+        <span><span style="opacity:.7;font-size:.8em;font-weight:400;">public class </span>Car</span>
+      </div>
+      <div class="class-section" style="background:#F0FDF4;">
+        <div class="class-section-label" style="color:var(--c2);">① Fields — the data the object holds</div>
+        <div class="class-row"><span class="tag" style="background:#DCFCE7;color:var(--c2);">private</span>String brand</div>
+        <div class="class-row"><span class="tag" style="background:#DCFCE7;color:var(--c2);">private</span>String colour</div>
+        <div class="class-row"><span class="tag" style="background:#DCFCE7;color:var(--c2);">private</span>int year</div>
+        <div class="class-row"><span class="tag" style="background:#DCFCE7;color:var(--c2);">private</span>double speed</div>
+      </div>
+      <div class="class-section" style="background:#EFF6FF;">
+        <div class="class-section-label" style="color:var(--c1);">② Constructor — sets up a new object</div>
+        <div class="class-row"><span class="tag" style="background:#DBEAFE;color:var(--c1);">public</span>Car(String brand, String colour, int year)</div>
+      </div>
+      <div class="class-section" style="background:#F5F3FF;">
+        <div class="class-section-label" style="color:var(--c3);">③ Getters — read the private data</div>
+        <div class="class-row"><span class="tag" style="background:#EDE9FE;color:var(--c3);">public</span>String getBrand()</div>
+        <div class="class-row"><span class="tag" style="background:#EDE9FE;color:var(--c3);">public</span>double getSpeed()</div>
+      </div>
+      <div class="class-section" style="background:#FFFBEB;">
+        <div class="class-section-label" style="color:var(--c4);">④ Other Methods — the behaviours</div>
+        <div class="class-row"><span class="tag" style="background:#FEF3C7;color:var(--c4);">public</span>void accelerate(double amount)</div>
+        <div class="class-row"><span class="tag" style="background:#FEF3C7;color:var(--c4);">public</span>String toString()</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW TO WRITE A CLASS — NUMBERED STEPS -->
+  <h3 style="font-family:'Fraunces',serif;font-size:1.3rem;margin:28px 0 14px;">How to Write a Class — Step by Step</h3>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num" style="background:var(--c2)">1</div>
+      <div class="step-body">
+        <h4>Declare the class</h4>
+        <p>Write <code>public class ClassName {</code> — the name must start with a capital letter and match the filename.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:var(--c2)">2</div>
+      <div class="step-body">
+        <h4>Add private fields</h4>
+        <p>These are the variables that store data for each object. Always make them <code>private</code>.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:var(--c2)">3</div>
+      <div class="step-body">
+        <h4>Write the constructor</h4>
+        <p>Same name as the class, no return type. Uses <code>this.field = parameter</code> to set each field.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:var(--c2)">4</div>
+      <div class="step-body">
+        <h4>Write getters (and setters if needed)</h4>
+        <p>A getter returns a field value. A setter lets outside code safely change a field (with validation if needed).</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:var(--c2)">5</div>
+      <div class="step-body">
+        <h4>Add other methods</h4>
+        <p>These are the behaviours — things the object can do. E.g. <code>accelerate()</code>, <code>toString()</code>.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CODE EXAMPLE -->
+  <div class="code-wrap">
+    <div class="code-head"><span>Full class + creating objects</span><span class="badge">JAVA</span></div>
+    <pre><span class="kw">public class</span> <span class="cl">Car</span> {
+
+    <span class="cm">// ① Fields — always private</span>
+    <span class="kw">private</span> <span class="tp">String</span> brand;
+    <span class="kw">private</span> <span class="tp">int</span>    year;
+    <span class="kw">private</span> <span class="tp">double</span> speed;
+
+    <span class="cm">// ② Constructor — same name, no return type</span>
+    <span class="kw">public</span> <span class="cl">Car</span>(<span class="tp">String</span> brand, <span class="tp">int</span> year) {
+        <span class="kw">this</span>.brand = brand;   <span class="cm">// this.brand = field, brand = parameter</span>
+        <span class="kw">this</span>.year  = year;
+        <span class="kw">this</span>.speed = <span class="nm">0</span>;
+    }
+
+    <span class="cm">// ③ Getter</span>
+    <span class="kw">public</span> <span class="tp">String</span> <span class="mt">getBrand</span>() { <span class="kw">return</span> brand; }
+    <span class="kw">public</span> <span class="tp">double</span> <span class="mt">getSpeed</span>() { <span class="kw">return</span> speed; }
+
+    <span class="cm">// ④ Method</span>
+    <span class="kw">public void</span> <span class="mt">accelerate</span>(<span class="tp">double</span> amount) {
+        speed += amount;
+    }
+
+    <span class="kw">public</span> <span class="tp">String</span> <span class="mt">toString</span>() {
+        <span class="kw">return</span> brand + <span class="st">" ("</span> + year + <span class="st">") — speed: "</span> + speed;
+    }
+}
+
+<span class="cm">// ─── In main() ─────────────────────────────────────────────</span>
+<span class="cl">Car</span> myCar = <span class="kw">new</span> <span class="cl">Car</span>(<span class="st">"Toyota"</span>, <span class="nm">2022</span>);   <span class="cm">// creates an object</span>
+myCar.<span class="mt">accelerate</span>(<span class="nm">80</span>);
+System.out.<span class="mt">println</span>(myCar.<span class="mt">toString</span>()); <span class="cm">// Toyota (2022) — speed: 80.0</span></pre>
+  </div>
+</section>
+
+<hr class="sec-divider">
+
+<!-- ════════════════════════════════════════
+  ③ INHERITANCE
+════════════════════════════════════════ -->
+<section class="section" id="inheritance">
+  <div class="sec-label">
+    <div class="sec-num" style="background:var(--c3)">3</div>
+    <div class="sec-title"><small>Parent &amp; Child Classes</small>Inheritance</div>
+  </div>
+
+  <p>Inheritance means a <strong>child class</strong> automatically gets all the fields and methods of a <strong>parent class</strong>. You use the keyword <code>extends</code>. This prevents code duplication.</p>
+
+  <!-- INHERITANCE TREE DIAGRAM -->
+  <div class="diagram">
+    <div class="diagram-title">🌳 Inheritance Tree — Animal example</div>
+    <div class="inherit-tree">
+      <div class="inode" style="border-color:var(--c3);background:#F5F3FF;color:var(--c3);">
+        Animal
+        <div class="inode-sub">name, age · eat() · sleep()</div>
+      </div>
+      <div class="arrow-down"></div>
+      <div class="irow">
+        <div class="ibranch">
+          <div class="inode" style="border-color:var(--c2);background:#F0FDF4;color:var(--c2);">
+            Dog
+            <div class="inode-sub">breed · fetch() · bark()</div>
+          </div>
+          <div class="arrow-down"></div>
+          <div class="irow" style="gap:10px;">
+            <div class="inode" style="border-color:var(--c1);background:#EFF6FF;color:var(--c1);font-size:.82rem;padding:8px 14px;">
+              GoldenRetriever
+              <div class="inode-sub">coatColour</div>
+            </div>
+            <div class="inode" style="border-color:var(--c1);background:#EFF6FF;color:var(--c1);font-size:.82rem;padding:8px 14px;">
+              Labrador
+              <div class="inode-sub">guideStatus</div>
+            </div>
+          </div>
+        </div>
+        <div style="width:2px;background:transparent;min-width:30px;"></div>
+        <div class="ibranch">
+          <div class="inode" style="border-color:var(--c10);background:#FDF2F8;color:var(--c10);">
+            Cat
+            <div class="inode-sub">indoor · purr() · scratch()</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p style="text-align:center;font-size:.82rem;color:var(--ink2);margin-top:18px;">Every Dog IS-AN Animal. GoldenRetriever IS-A Dog IS-AN Animal. Each level adds more detail.</p>
+  </div>
+
+  <!-- STEP BY STEP -->
+  <h3 style="font-family:'Fraunces',serif;font-size:1.3rem;margin:24px 0 14px;">How Inheritance Works — Step by Step</h3>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num" style="background:var(--c3)">1</div>
+      <div class="step-body">
+        <h4>Write the Parent class normally</h4>
+        <p>Put shared fields and methods here. E.g. all animals have a name and can eat.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:var(--c3)">2</div>
+      <div class="step-body">
+        <h4>Write the Child class with <code>extends</code></h4>
+        <p><code>public class Dog extends Animal</code> — Dog now has everything Animal has.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:var(--c3)">3</div>
+      <div class="step-body">
+        <h4>Add Dog-only fields</h4>
+        <p>E.g. <code>private String breed</code> — only dogs have a breed, not all animals.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:var(--c3)">4</div>
+      <div class="step-body">
+        <h4>Call <code>super()</code> first in the child constructor</h4>
+        <p><code>super(name, age)</code> calls the Animal constructor to set those fields. Must be line 1.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:var(--c3)">5</div>
+      <div class="step-body">
+        <h4>Add Dog-only methods (and override if needed)</h4>
+        <p>E.g. <code>fetch()</code> is a Dog-only method. You can also override <code>toString()</code> from Animal.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="code-wrap">
+    <div class="code-head"><span>Parent class → Child class → Usage</span><span class="badge">JAVA</span></div>
+    <pre><span class="cm">// ─── PARENT ────────────────────────────────────────────────</span>
+<span class="kw">public class</span> <span class="cl">Animal</span> {
+    <span class="kw">private</span> <span class="tp">String</span> name;
+    <span class="kw">private</span> <span class="tp">int</span>    age;
+
+    <span class="kw">public</span> <span class="cl">Animal</span>(<span class="tp">String</span> name, <span class="tp">int</span> age) {
+        <span class="kw">this</span>.name = name;
+        <span class="kw">this</span>.age  = age;
+    }
+
+    <span class="kw">public</span> <span class="tp">String</span> <span class="mt">getName</span>() { <span class="kw">return</span> name; }
+    <span class="kw">public</span> <span class="tp">int</span>    <span class="mt">getAge</span>()  { <span class="kw">return</span> age;  }
+
+    <span class="kw">public void</span> <span class="mt">eat</span>() { System.out.<span class="mt">println</span>(name + <span class="st">" is eating"</span>); }
+
+    <span class="kw">public</span> <span class="tp">String</span> <span class="mt">toString</span>() { <span class="kw">return</span> name + <span class="st">", age "</span> + age; }
+}
+
+<span class="cm">// ─── CHILD ─────────────────────────────────────────────────</span>
+<span class="kw">public class</span> <span class="cl">Dog</span> <span class="kw">extends</span> <span class="cl">Animal</span> {        <span class="cm">// ← "extends" = inheritance</span>
+    <span class="kw">private</span> <span class="tp">String</span> breed;               <span class="cm">// Dog-only field</span>
+
+    <span class="kw">public</span> <span class="cl">Dog</span>(<span class="tp">String</span> name, <span class="tp">int</span> age, <span class="tp">String</span> breed) {
+        <span class="kw">super</span>(name, age);               <span class="cm">// ← MUST be first line!</span>
+        <span class="kw">this</span>.breed = breed;
+    }
+
+    <span class="kw">public</span> <span class="tp">String</span> <span class="mt">getBreed</span>() { <span class="kw">return</span> breed; }
+
+    <span class="kw">public void</span> <span class="mt">fetch</span>() {              <span class="cm">// Dog-only method</span>
+        System.out.<span class="mt">println</span>(<span class="mt">getName</span>() + <span class="st">" fetches!"</span>);
+    }
+
+    <span class="an">@Override</span>
+    <span class="kw">public</span> <span class="tp">String</span> <span class="mt">toString</span>() {        <span class="cm">// override the parent version</span>
+        <span class="kw">return</span> <span class="kw">super</span>.<span class="mt">toString</span>() + <span class="st">", breed: "</span> + breed;
+    }
+}
+
+<span class="cm">// ─── USAGE ─────────────────────────────────────────────────</span>
+<span class="cl">Dog</span> d = <span class="kw">new</span> <span class="cl">Dog</span>(<span class="st">"Rex"</span>, <span class="nm">3</span>, <span class="st">"Labrador"</span>);
+d.<span class="mt">eat</span>();                         <span class="cm">// inherited from Animal → "Rex is eating"</span>
+d.<span class="mt">fetch</span>();                       <span class="cm">// Dog's own method      → "Rex fetches!"</span>
+System.out.<span class="mt">println</span>(d.<span class="mt">toString</span>()); <span class="cm">// → "Rex, age 3, breed: Labrador"</span></pre>
+  </div>
+
+  <!-- Abstract class -->
+  <h3 style="font-family:'Fraunces',serif;font-size:1.3rem;margin:28px 0 10px;">Abstract Classes</h3>
+  <p>An <strong>abstract class</strong> is a parent class that <em>cannot be created directly</em>. It's just a template. Abstract methods have no body — the child must fill them in.</p>
+
+  <div class="diagram" style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start;">
+    <div style="flex:1;min-width:200px;">
+      <div style="font-weight:700;margin-bottom:8px;color:var(--c3);">Abstract: Shape</div>
+      <div style="background:#F5F3FF;border:2px solid var(--c3);border-radius:10px;padding:14px;font-family:'JetBrains Mono',monospace;font-size:.8rem;">
+        <div style="color:#7C3AED;">abstract area()</div>
+        <div style="color:#7C3AED;">abstract perimeter()</div>
+        <div style="color:var(--ink2);font-size:.72rem;margin-top:8px;">← no body, subclass must implement</div>
+      </div>
+    </div>
+    <div style="font-size:1.8rem;margin-top:30px;color:var(--border);">→</div>
+    <div style="flex:1;min-width:180px;">
+      <div style="font-weight:700;margin-bottom:8px;color:var(--c2);">Circle extends Shape</div>
+      <div style="background:#F0FDF4;border:2px solid var(--c2);border-radius:10px;padding:14px;font-family:'JetBrains Mono',monospace;font-size:.8rem;">
+        <div>area() { π×r² }</div>
+        <div>perimeter() { 2πr }</div>
+        <div style="color:var(--ink2);font-size:.72rem;margin-top:8px;">← provides the body</div>
+      </div>
+    </div>
+    <div style="font-size:1.8rem;margin-top:30px;color:var(--border);">→</div>
+    <div style="flex:1;min-width:180px;">
+      <div style="font-weight:700;margin-bottom:8px;color:var(--c5);">Rectangle extends Shape</div>
+      <div style="background:#FEF2F2;border:2px solid var(--c5);border-radius:10px;padding:14px;font-family:'JetBrains Mono',monospace;font-size:.8rem;">
+        <div>area() { w×h }</div>
+        <div>perimeter() { 2(w+h) }</div>
+        <div style="color:var(--ink2);font-size:.72rem;margin-top:8px;">← provides the body</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout warn">
+    <div class="callout-icon">⚠️</div>
+    <div class="callout-body"><strong>Don't confuse:</strong> <strong>Overriding</strong> = child replaces a parent method (same name, same parameters). <strong>Overloading</strong> = same method name in same class, but different parameters.</div>
+  </div>
+</section>
+
+<hr class="sec-divider">
+
+<!-- ════════════════════════════════════════
+  ④ METHODS
+════════════════════════════════════════ -->
+<section class="section" id="methods">
+  <div class="sec-label">
+    <div class="sec-num" style="background:var(--c4)">4</div>
+    <div class="sec-title"><small>What the object can do</small>Methods</div>
+  </div>
+
+  <p>A <strong>method</strong> is a block of code inside a class that does something. It can take inputs (parameters) and return a result.</p>
+
+  <!-- METHOD ANATOMY DIAGRAM -->
+  <div class="diagram">
+    <div class="diagram-title">🔬 Anatomy of a Method</div>
+    <div style="display:flex;gap:0;flex-wrap:wrap;justify-content:center;align-items:flex-end;">
+      <!-- boxes with labels underneath -->
+      <div style="text-align:center;margin:4px;">
+        <div style="background:#DBEAFE;border:2px solid var(--c1);border-radius:8px;padding:10px 16px;font-family:'JetBrains Mono',monospace;font-weight:700;">public</div>
+        <div style="font-size:.72rem;color:var(--c1);margin-top:5px;font-weight:700;">① Access<br>Modifier</div>
+      </div>
+      <div style="margin:4px 2px;font-size:1.4rem;padding-bottom:28px;color:var(--border);"></div>
+      <div style="text-align:center;margin:4px;">
+        <div style="background:#EDE9FE;border:2px solid var(--c3);border-radius:8px;padding:10px 16px;font-family:'JetBrains Mono',monospace;font-weight:700;">double</div>
+        <div style="font-size:.72rem;color:var(--c3);margin-top:5px;font-weight:700;">② Return<br>Type</div>
+      </div>
+      <div style="text-align:center;margin:4px;">
+        <div style="background:#FEF3C7;border:2px solid var(--c4);border-radius:8px;padding:10px 16px;font-family:'JetBrains Mono',monospace;font-weight:700;">calcBMI</div>
+        <div style="font-size:.72rem;color:var(--c4);margin-top:5px;font-weight:700;">③ Method<br>Name</div>
+      </div>
+      <div style="text-align:center;margin:4px;">
+        <div style="background:#F0FDF4;border:2px solid var(--c2);border-radius:8px;padding:10px 16px;font-family:'JetBrains Mono',monospace;font-weight:700;">(double kg, double m)</div>
+        <div style="font-size:.72rem;color:var(--c2);margin-top:5px;font-weight:700;">④ Parameters<br>(inputs)</div>
+      </div>
+      <div style="text-align:center;margin:4px;">
+        <div style="background:#FEF2F2;border:2px solid var(--c5);border-radius:8px;padding:10px 16px;font-family:'JetBrains Mono',monospace;font-weight:700;">{ return kg/(m*m); }</div>
+        <div style="font-size:.72rem;color:var(--c5);margin-top:5px;font-weight:700;">⑤ Method<br>Body</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TYPE COMPARISON -->
+  <div class="diagram">
+    <div class="diagram-title">📊 Types of Methods</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;">
+      <div style="background:#F0FDF4;border:2px solid var(--c2);border-radius:10px;padding:16px;">
+        <div style="font-weight:700;color:var(--c2);margin-bottom:6px;">void method</div>
+        <div style="font-size:.85rem;color:var(--ink2);">Does something, returns <strong>nothing</strong>.</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:.75rem;margin-top:8px;background:#fff;padding:6px;border-radius:6px;">public <b>void</b> print()</div>
+      </div>
+      <div style="background:#EFF6FF;border:2px solid var(--c1);border-radius:10px;padding:16px;">
+        <div style="font-weight:700;color:var(--c1);margin-bottom:6px;">Value-returning</div>
+        <div style="font-size:.85rem;color:var(--ink2);">Computes and <strong>sends back</strong> a result.</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:.75rem;margin-top:8px;background:#fff;padding:6px;border-radius:6px;">public <b>int</b> getAge()</div>
+      </div>
+      <div style="background:#F5F3FF;border:2px solid var(--c3);border-radius:10px;padding:16px;">
+        <div style="font-weight:700;color:var(--c3);margin-bottom:6px;">static method</div>
+        <div style="font-size:.85rem;color:var(--ink2);">Belongs to the class, not an object. No <code>new</code> needed.</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:.75rem;margin-top:8px;background:#fff;padding:6px;border-radius:6px;">Math.<b>sqrt</b>(25)</div>
+      </div>
+      <div style="background:#FFFBEB;border:2px solid var(--c4);border-radius:10px;padding:16px;">
+        <div style="font-weight:700;color:var(--c4);margin-bottom:6px;">Getter / Setter</div>
+        <div style="font-size:.85rem;color:var(--ink2);">Reads or changes a private field safely.</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:.75rem;margin-top:8px;background:#fff;padding:6px;border-radius:6px;">getName() / setName()</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="code-wrap">
+    <div class="code-head"><span>Method examples</span><span class="badge">JAVA</span></div>
+    <pre><span class="cm">// ① void method — does something, returns nothing</span>
+<span class="kw">public void</span> <span class="mt">greet</span>(<span class="tp">String</span> name) {
+    System.out.<span class="mt">println</span>(<span class="st">"Hello, "</span> + name + <span class="st">"!"</span>);
+}
+
+<span class="cm">// ② Value-returning method — must have return statement</span>
+<span class="kw">public double</span> <span class="mt">calcArea</span>(<span class="tp">double</span> width, <span class="tp">double</span> height) {
+    <span class="kw">return</span> width * height;
+}
+
+<span class="cm">// ③ Getter (accessor)</span>
+<span class="kw">public</span> <span class="tp">String</span> <span class="mt">getName</span>()  { <span class="kw">return</span> name; }
+
+<span class="cm">// ④ Setter (mutator) with validation</span>
+<span class="kw">public void</span> <span class="mt">setAge</span>(<span class="tp">int</span> age) {
+    <span class="kw">if</span> (age &gt;= <span class="nm">0</span> &amp;&amp; age &lt;= <span class="nm">120</span>) {
+        <span class="kw">this</span>.age = age;
+    }
+}
+
+<span class="cm">// ⑤ Static method — call with ClassName.method() — no object needed</span>
+<span class="kw">public static boolean</span> <span class="mt">isEven</span>(<span class="tp">int</span> n) {
+    <span class="kw">return</span> n % <span class="nm">2</span> == <span class="nm">0</span>;
+}
+<span class="cm">// Usage: boolean result = MyClass.isEven(4);  → true</span></pre>
+  </div>
+</section>
+
+<hr class="sec-divider">
+
+<!-- ════════════════════════════════════════
+  ⑤ ARRAYS
+════════════════════════════════════════ -->
+<section class="section" id="arrays">
+  <div class="sec-label">
+    <div class="sec-num" style="background:var(--c5)">5</div>
+    <div class="sec-title"><small>Fixed-size collections</small>Arrays</div>
+  </div>
+
+  <p>An array stores <strong>multiple values of the same type</strong> in one variable. The size is fixed when you create it. Think of it as a row of labelled boxes.</p>
+
+  <!-- ARRAY VISUAL -->
+  <div class="diagram">
+    <div class="diagram-title">📦 Array Visual — int[] scores = {85, 92, 78, 96, 88}</div>
+    <div style="margin-bottom:8px;font-size:.8rem;color:var(--ink2);">Variable name: <code>scores</code></div>
+    <div class="arr-visual">
+      <div class="arr-cell">
+        <div class="arr-label">value</div>
+        <div class="arr-box" style="border-color:var(--c5);background:#FEF2F2;color:var(--c5);">85</div>
+        <div class="arr-idx">index 0</div>
+      </div>
+      <div class="arr-cell">
+        <div class="arr-label">&nbsp;</div>
+        <div class="arr-box" style="border-color:var(--c5);background:#FEF2F2;color:var(--c5);">92</div>
+        <div class="arr-idx">index 1</div>
+      </div>
+      <div class="arr-cell">
+        <div class="arr-label">&nbsp;</div>
+        <div class="arr-box" style="border-color:var(--c5);background:#FEF2F2;color:var(--c5);">78</div>
+        <div class="arr-idx">index 2</div>
+      </div>
+      <div class="arr-cell">
+        <div class="arr-label">&nbsp;</div>
+        <div class="arr-box" style="border-color:var(--c5);background:#FEF2F2;color:var(--c5);">96</div>
+        <div class="arr-idx">index 3</div>
+      </div>
+      <div class="arr-cell">
+        <div class="arr-label">&nbsp;</div>
+        <div class="arr-box" style="border-color:var(--c5);background:#FEF2F2;color:var(--c5);">88</div>
+        <div class="arr-idx">index 4</div>
+      </div>
+      <div style="margin-left:16px;font-size:.82rem;color:var(--ink2);align-self:center;">
+        <div>← scores[0] = 85</div>
+        <div>← scores[4] = 88 (last)</div>
+        <div>← scores.length = <strong>5</strong></div>
+      </div>
+    </div>
+    <div class="callout warn" style="margin-top:14px;">
+      <div class="callout-icon">⚠️</div>
+      <div class="callout-body"><strong>Indexing starts at 0, not 1!</strong> Last valid index = length − 1. Accessing scores[5] → crashes with ArrayIndexOutOfBoundsException.</div>
+    </div>
+  </div>
+
+  <h3 style="font-family:'Fraunces',serif;font-size:1.3rem;margin:24px 0 14px;">3 Ways to Create an Array</h3>
+
+  <div class="code-wrap">
+    <div class="code-head"><span>Declaring, creating, using arrays</span><span class="badge">JAVA</span></div>
+    <pre><span class="cm">// ── Method 1: declare and create separately</span>
+<span class="tp">int</span>[] scores;
+scores = <span class="kw">new</span> <span class="tp">int</span>[<span class="nm">5</span>];           <span class="cm">// all values start as 0</span>
+scores[<span class="nm">0</span>] = <span class="nm">85</span>;
+scores[<span class="nm">1</span>] = <span class="nm">92</span>;
+
+<span class="cm">// ── Method 2: declare and create on one line</span>
+<span class="tp">double</span>[] prices = <span class="kw">new</span> <span class="tp">double</span>[<span class="nm">3</span>]; <span class="cm">// [0.0, 0.0, 0.0]</span>
+
+<span class="cm">// ── Method 3: shortcut — fill in values straight away</span>
+<span class="tp">String</span>[] days = {<span class="st">"Mon"</span>, <span class="st">"Tue"</span>, <span class="st">"Wed"</span>, <span class="st">"Thu"</span>, <span class="st">"Fri"</span>};
+
+<span class="cm">// ── Access elements ─────────────────────────────────────</span>
+System.out.<span class="mt">println</span>(days[<span class="nm">0</span>]);           <span class="cm">// → Mon</span>
+System.out.<span class="mt">println</span>(days.length);        <span class="cm">// → 5 (it's a field, no brackets!)</span>
+System.out.<span class="mt">println</span>(days[days.length-<span class="nm">1</span>]);<span class="cm">// → Fri (last element)</span></pre>
+  </div>
+
+  <h3 style="font-family:'Fraunces',serif;font-size:1.3rem;margin:24px 0 14px;">Common Array Algorithms</h3>
+  <div class="code-wrap">
+    <div class="code-head"><span>Sum, Max, Min, Count, Reverse</span><span class="badge">JAVA</span></div>
+    <pre><span class="tp">int</span>[] arr = {<span class="nm">10</span>, <span class="nm">40</span>, <span class="nm">25</span>, <span class="nm">60</span>, <span class="nm">15</span>};
+
+<span class="cm">// ① Sum all elements</span>
+<span class="tp">int</span> sum = <span class="nm">0</span>;
+<span class="kw">for</span> (<span class="tp">int</span> i = <span class="nm">0</span>; i &lt; arr.length; i++) {
+    sum += arr[i];
+}  <span class="cm">// sum = 150</span>
+
+<span class="cm">// ② Find the largest value</span>
+<span class="tp">int</span> max = arr[<span class="nm">0</span>];                       <span class="cm">// start with index 0</span>
+<span class="kw">for</span> (<span class="tp">int</span> i = <span class="nm">1</span>; i &lt; arr.length; i++) { <span class="cm">// check the rest</span>
+    <span class="kw">if</span> (arr[i] &gt; max) max = arr[i];
+}  <span class="cm">// max = 60</span>
+
+<span class="cm">// ③ Count how many are above 20</span>
+<span class="tp">int</span> count = <span class="nm">0</span>;
+<span class="kw">for</span> (<span class="tp">int</span> v : arr) {     <span class="cm">// for-each (read-only)</span>
+    <span class="kw">if</span> (v &gt; <span class="nm">20</span>) count++;
+}  <span class="cm">// count = 3  (40, 25, 60)</span>
+
+<span class="cm">// ④ Average</span>
+<span class="tp">double</span> avg = (<span class="tp">double</span>) sum / arr.length;  <span class="cm">// cast so we get decimals</span></pre>
+  </div>
+
+  <!-- 2D ARRAY VISUAL -->
+  <h3 style="font-family:'Fraunces',serif;font-size:1.3rem;margin:28px 0 10px;">2D Arrays — A Table of Values</h3>
+  <p>A 2D array is an array of arrays — like a spreadsheet with rows and columns.</p>
+
+  <div class="diagram">
+    <div class="diagram-title">🗂️ 2D Array: int[][] grid = {{1,2,3},{4,5,6},{7,8,9}}</div>
+    <div style="display:flex;gap:10px;align-items:flex-start;">
+      <div>
+        <div style="font-size:.72rem;font-weight:700;color:var(--ink2);margin-bottom:6px;text-align:center;">↓ row</div>
+        <div style="display:flex;flex-direction:column;gap:4px;">
+          <div style="display:flex;gap:4px;align-items:center;">
+            <div style="width:28px;font-size:.72rem;font-weight:700;color:var(--c6);text-align:right;">row 0</div>
+            <div style="display:flex;gap:4px;">
+              <div style="width:50px;height:42px;border:2px solid var(--c6);border-radius:6px;background:#ECFEFF;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;">1<div style="font-size:.6rem;color:var(--ink2);">[0][0]</div></div>
+              <div style="width:50px;height:42px;border:2px solid var(--c6);border-radius:6px;background:#ECFEFF;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;">2<div style="font-size:.6rem;color:var(--ink2);">[0][1]</div></div>
+              <div style="width:50px;height:42px;border:2px solid var(--c6);border-radius:6px;background:#ECFEFF;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;">3<div style="font-size:.6rem;color:var(--ink2);">[0][2]</div></div>
+            </div>
+          </div>
+          <div style="display:flex;gap:4px;align-items:center;">
+            <div style="width:28px;font-size:.72rem;font-weight:700;color:var(--c6);text-align:right;">row 1</div>
+            <div style="display:flex;gap:4px;">
+              <div style="width:50px;height:42px;border:2px solid var(--c7);border-radius:6px;background:#EEF2FF;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;">4<div style="font-size:.6rem;color:var(--ink2);">[1][0]</div></div>
+              <div style="width:50px;height:42px;border:2px solid var(--c7);border-radius:6px;background:#EEF2FF;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--c7);">5<div style="font-size:.6rem;color:var(--ink2);">[1][1]</div></div>
+              <div style="width:50px;height:42px;border:2px solid var(--c7);border-radius:6px;background:#EEF2FF;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;">6<div style="font-size:.6rem;color:var(--ink2);">[1][2]</div></div>
+            </div>
+          </div>
+          <div style="display:flex;gap:4px;align-items:center;">
+            <div style="width:28px;font-size:.72rem;font-weight:700;color:var(--c6);text-align:right;">row 2</div>
+            <div style="display:flex;gap:4px;">
+              <div style="width:50px;height:42px;border:2px solid var(--c10);border-radius:6px;background:#FDF2F8;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;">7<div style="font-size:.6rem;color:var(--ink2);">[2][0]</div></div>
+              <div style="width:50px;height:42px;border:2px solid var(--c10);border-radius:6px;background:#FDF2F8;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;">8<div style="font-size:.6rem;color:var(--ink2);">[2][1]</div></div>
+              <div style="width:50px;height:42px;border:2px solid var(--c10);border-radius:6px;background:#FDF2F8;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;">9<div style="font-size:.6rem;color:var(--ink2);">[2][2]</div></div>
+            </div>
+          </div>
+        </div>
+        <div style="font-size:.72rem;font-weight:700;color:var(--ink2);margin-top:4px;padding-left:32px;">col 0 &nbsp; col 1 &nbsp; col 2 → column</div>
+      </div>
+      <div style="font-size:.85rem;color:var(--ink2);padding-top:10px;">
+        <div style="margin-bottom:8px;"><code>grid[1][2]</code> = <strong style="color:var(--c7);">6</strong> (row 1, col 2)</div>
+        <div style="margin-bottom:8px;"><code>grid.length</code> = 3 (rows)</div>
+        <div><code>grid[0].length</code> = 3 (cols in row 0)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="sec-divider">
+
+<!-- ════════════════════════════════════════
+  ⑥ ARRAYS OF OBJECTS
+════════════════════════════════════════ -->
+<section class="section" id="arrobj">
+  <div class="sec-label">
+    <div class="sec-num" style="background:var(--c6)">6</div>
+    <div class="sec-title"><small>Arrays that store objects</small>Arrays of Objects</div>
+  </div>
+
+  <p>Instead of storing numbers or text, an array can store <strong>objects</strong>. Each slot in the array holds a reference (pointer) to an object.</p>
+
+  <div class="diagram">
+    <div class="diagram-title">👥 Visualising an Array of Student Objects</div>
+    <div style="display:flex;gap:6px;align-items:flex-start;flex-wrap:wrap;">
+      <!-- array slots -->
+      <div style="display:flex;flex-direction:column;gap:4px;">
+        <div style="font-size:.72rem;font-weight:700;color:var(--ink2);text-align:center;margin-bottom:4px;">Student[] roster</div>
+        <div style="display:flex;gap:6px;">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+            <div style="width:72px;height:36px;border:2px solid var(--c6);border-radius:8px;background:#ECFEFF;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:700;color:var(--c6);">ref →</div>
+            <div style="font-size:.68rem;color:var(--ink2);">roster[0]</div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+            <div style="width:72px;height:36px;border:2px solid var(--c6);border-radius:8px;background:#ECFEFF;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:700;color:var(--c6);">ref →</div>
+            <div style="font-size:.68rem;color:var(--ink2);">roster[1]</div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+            <div style="width:72px;height:36px;border:2px solid var(--c6);border-radius:8px;background:#ECFEFF;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:700;color:var(--c6);">ref →</div>
+            <div style="font-size:.68rem;color:var(--ink2);">roster[2]</div>
+          </div>
+        </div>
+      </div>
+      <div style="font-size:1.4rem;padding-top:10px;">↓</div>
+      <div style="display:flex;flex-direction:column;gap:6px;font-size:.8rem;">
+        <div style="font-size:.72rem;font-weight:700;color:var(--ink2);margin-bottom:4px;">Objects in memory</div>
+        <div style="background:#F0FDF4;border:2px solid var(--c2);border-radius:8px;padding:8px 12px;">
+          <strong>Student</strong><br>name: "Alice"<br>grade: 92
+        </div>
+        <div style="background:#EFF6FF;border:2px solid var(--c1);border-radius:8px;padding:8px 12px;">
+          <strong>Student</strong><br>name: "Bob"<br>grade: 78
+        </div>
+        <div style="background:#F5F3FF;border:2px solid var(--c3);border-radius:8px;padding:8px 12px;">
+          <strong>Student</strong><br>name: "Charlie"<br>grade: 85
+        </div>
+      </div>
+    </div>
+    <div class="callout warn" style="margin-top:14px;">
+      <div class="callout-icon">⚠️</div>
+      <div class="callout-body"><strong>Creating the array does NOT create the objects!</strong> <code>Student[] roster = new Student[3]</code> gives you 3 <code>null</code> slots. You must fill each with <code>roster[0] = new Student(...)</code>.</div>
+    </div>
+  </div>
+
+  <div class="code-wrap">
+    <div class="code-head"><span>Full example — array of Student objects</span><span class="badge">JAVA</span></div>
+    <pre><span class="cm">// ─── Step 1: Create the array (empty slots) ───────────────</span>
+<span class="cl">Student</span>[] roster = <span class="kw">new</span> <span class="cl">Student</span>[<span class="nm">3</span>];
+
+<span class="cm">// ─── Step 2: Fill each slot with an object ────────────────</span>
+roster[<span class="nm">0</span>] = <span class="kw">new</span> <span class="cl">Student</span>(<span class="st">"Alice"</span>,   <span class="nm">92</span>);
+roster[<span class="nm">1</span>] = <span class="kw">new</span> <span class="cl">Student</span>(<span class="st">"Bob"</span>,     <span class="nm">78</span>);
+roster[<span class="nm">2</span>] = <span class="kw">new</span> <span class="cl">Student</span>(<span class="st">"Charlie"</span>, <span class="nm">85</span>);
+
+<span class="cm">// ─── Step 3: Access methods on array elements ─────────────</span>
+System.out.<span class="mt">println</span>(roster[<span class="nm">0</span>].<span class="mt">getName</span>());   <span class="cm">// → Alice</span>
+System.out.<span class="mt">println</span>(roster[<span class="nm">2</span>].<span class="mt">getGrade</span>());  <span class="cm">// → 85</span>
+
+<span class="cm">// ─── Step 4: Loop through all objects ─────────────────────</span>
+<span class="cl">Student</span> topStudent = roster[<span class="nm">0</span>];
+<span class="kw">for</span> (<span class="cl">Student</span> s : roster) {
+    System.out.<span class="mt">println</span>(s.<span class="mt">getName</span>() + <span class="st">": "</span> + s.<span class="mt">getGrade</span>());
+    <span class="kw">if</span> (s.<span class="mt">getGrade</span>() &gt; topStudent.<span class="mt">getGrade</span>()) {
+        topStudent = s;
+    }
+}
+System.out.<span class="mt">println</span>(<span class="st">"Top: "</span> + topStudent.<span class="mt">getName</span>()); <span class="cm">// → Alice</span></pre>
+  </div>
+</section>
+
+<hr class="sec-divider">
+
+<!-- ════════════════════════════════════════
+  ⑦ LOOPS
+════════════════════════════════════════ -->
+<section class="section" id="loops">
+  <div class="sec-label">
+    <div class="sec-num" style="background:var(--c7)">7</div>
+    <div class="sec-title"><small>Repeating code</small>Loops</div>
+  </div>
+
+  <p>Loops let you run the same block of code multiple times without copy-pasting it. Java has 4 types.</p>
+
+  <!-- LOOP COMPARISON DIAGRAM -->
+  <div class="diagram">
+    <div class="diagram-title">🔄 Choosing the Right Loop</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;">
+      <div style="background:#EEF2FF;border:2px solid var(--c7);border-radius:10px;padding:16px;text-align:center;">
+        <div style="font-size:1.6rem;">🔢</div>
+        <div style="font-weight:700;color:var(--c7);margin:6px 0;">for loop</div>
+        <div style="font-size:.83rem;color:var(--ink2);">You <strong>know exactly</strong> how many times</div>
+      </div>
+      <div style="background:#F0FDF4;border:2px solid var(--c2);border-radius:10px;padding:16px;text-align:center;">
+        <div style="font-size:1.6rem;">❓</div>
+        <div style="font-weight:700;color:var(--c2);margin:6px 0;">while loop</div>
+        <div style="font-size:.83rem;color:var(--ink2);">You <strong>don't know</strong> how many times. Might run 0 times.</div>
+      </div>
+      <div style="background:#FFFBEB;border:2px solid var(--c4);border-radius:10px;padding:16px;text-align:center;">
+        <div style="font-size:1.6rem;">✅</div>
+        <div style="font-weight:700;color:var(--c4);margin:6px 0;">do-while</div>
+        <div style="font-size:.83rem;color:var(--ink2);">Runs <strong>at least once</strong>, then checks condition.</div>
+      </div>
+      <div style="background:#FEF2F2;border:2px solid var(--c5);border-radius:10px;padding:16px;text-align:center;">
+        <div style="font-size:1.6rem;">📋</div>
+        <div style="font-weight:700;color:var(--c5);margin:6px 0;">for-each</div>
+        <div style="font-size:.83rem;color:var(--ink2);">Cleanly loop over every item in an <strong>array</strong>.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOR LOOP FLOWCHART -->
+  <div class="flow-wrap">
+    <div class="flow-title">📊 for loop Flowchart — for(int i=0; i&lt;5; i++)</div>
+    <svg class="flow" width="320" height="400" viewBox="0 0 320 400">
+      <defs>
+        <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="#1A1A2E"/>
+        </marker>
+      </defs>
+      <!-- START -->
+      <ellipse cx="160" cy="28" rx="60" ry="22" fill="#4F46E5" stroke="#312E81" stroke-width="2"/>
+      <text x="160" y="33" text-anchor="middle" fill="white" font-family="DM Sans,sans-serif" font-size="13" font-weight="700">START</text>
+      <!-- arrow -->
+      <line x1="160" y1="50" x2="160" y2="74" stroke="#1A1A2E" stroke-width="2" marker-end="url(#arr)"/>
+      <!-- INIT -->
+      <rect x="90" y="74" width="140" height="38" rx="8" fill="#EEF2FF" stroke="#4F46E5" stroke-width="2"/>
+      <text x="160" y="96" text-anchor="middle" fill="#4F46E5" font-family="JetBrains Mono,monospace" font-size="12" font-weight="600">int i = 0</text>
+      <text x="160" y="108" text-anchor="middle" fill="#6B7280" font-family="DM Sans,sans-serif" font-size="9">① Initialise</text>
+      <!-- arrow -->
+      <line x1="160" y1="112" x2="160" y2="136" stroke="#1A1A2E" stroke-width="2" marker-end="url(#arr)"/>
+      <!-- CONDITION diamond -->
+      <polygon points="160,136 250,172 160,208 70,172" fill="#FEF3C7" stroke="#D97706" stroke-width="2"/>
+      <text x="160" y="168" text-anchor="middle" fill="#92400E" font-family="JetBrains Mono,monospace" font-size="12" font-weight="600">i &lt; 5 ?</text>
+      <text x="160" y="182" text-anchor="middle" fill="#6B7280" font-family="DM Sans,sans-serif" font-size="9">② Check condition</text>
+      <!-- YES arrow down -->
+      <line x1="160" y1="208" x2="160" y2="234" stroke="#059669" stroke-width="2" marker-end="url(#arr)"/>
+      <text x="172" y="225" fill="#059669" font-family="DM Sans,sans-serif" font-size="11" font-weight="700">YES</text>
+      <!-- BODY -->
+      <rect x="78" y="234" width="164" height="38" rx="8" fill="#F0FDF4" stroke="#059669" stroke-width="2"/>
+      <text x="160" y="252" text-anchor="middle" fill="#065F46" font-family="JetBrains Mono,monospace" font-size="11">run the code block</text>
+      <text x="160" y="265" text-anchor="middle" fill="#6B7280" font-family="DM Sans,sans-serif" font-size="9">③ Execute body</text>
+      <!-- arrow -->
+      <line x1="160" y1="272" x2="160" y2="296" stroke="#1A1A2E" stroke-width="2" marker-end="url(#arr)"/>
+      <!-- UPDATE -->
+      <rect x="96" y="296" width="128" height="36" rx="8" fill="#EDE9FE" stroke="#7C3AED" stroke-width="2"/>
+      <text x="160" y="316" text-anchor="middle" fill="#5B21B6" font-family="JetBrains Mono,monospace" font-size="12" font-weight="600">i++</text>
+      <text x="160" y="328" text-anchor="middle" fill="#6B7280" font-family="DM Sans,sans-serif" font-size="9">④ Update</text>
+      <!-- loop back arrow -->
+      <line x1="96" y1="314" x2="32" y2="314" stroke="#7C3AED" stroke-width="2"/>
+      <line x1="32" y1="314" x2="32" y2="172" stroke="#7C3AED" stroke-width="2"/>
+      <line x1="32" y1="172" x2="68" y2="172" stroke="#7C3AED" stroke-width="2" marker-end="url(#arr)"/>
+      <text x="18" y="248" fill="#7C3AED" font-family="DM Sans,sans-serif" font-size="10" font-weight="700" transform="rotate(-90,18,248)">loop back</text>
+      <!-- NO arrow -->
+      <line x1="250" y1="172" x2="292" y2="172" stroke="#DC2626" stroke-width="2"/>
+      <line x1="292" y1="172" x2="292" y2="360" stroke="#DC2626" stroke-width="2"/>
+      <line x1="292" y1="360" x2="206" y2="360" stroke="#DC2626" stroke-width="2" marker-end="url(#arr)"/>
+      <text x="276" y="162" fill="#DC2626" font-family="DM Sans,sans-serif" font-size="11" font-weight="700">NO</text>
+      <!-- END -->
+      <ellipse cx="160" cy="375" rx="50" ry="20" fill="#1A1A2E"/>
+      <text x="160" y="380" text-anchor="middle" fill="white" font-family="DM Sans,sans-serif" font-size="12" font-weight="700">END</text>
+    </svg>
+  </div>
+
+  <!-- WHILE LOOP FLOWCHART -->
+  <div class="flow-wrap">
+    <div class="flow-title">📊 while loop Flowchart</div>
+    <svg class="flow" width="300" height="340" viewBox="0 0 300 340">
+      <defs>
+        <marker id="arr2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="#1A1A2E"/>
+        </marker>
+      </defs>
+      <ellipse cx="150" cy="26" rx="60" ry="22" fill="#0BAD7A" stroke="#065F46" stroke-width="2"/>
+      <text x="150" y="31" text-anchor="middle" fill="white" font-family="DM Sans,sans-serif" font-size="13" font-weight="700">START</text>
+      <line x1="150" y1="48" x2="150" y2="72" stroke="#1A1A2E" stroke-width="2" marker-end="url(#arr2)"/>
+      <!-- CONDITION -->
+      <polygon points="150,72 240,110 150,148 60,110" fill="#FEF3C7" stroke="#D97706" stroke-width="2"/>
+      <text x="150" y="106" text-anchor="middle" fill="#92400E" font-family="JetBrains Mono,monospace" font-size="12" font-weight="600">condition</text>
+      <text x="150" y="120" text-anchor="middle" fill="#92400E" font-family="JetBrains Mono,monospace" font-size="11">true?</text>
+      <!-- YES down -->
+      <line x1="150" y1="148" x2="150" y2="172" stroke="#059669" stroke-width="2" marker-end="url(#arr2)"/>
+      <text x="162" y="165" fill="#059669" font-family="DM Sans,sans-serif" font-size="11" font-weight="700">YES</text>
+      <!-- BODY -->
+      <rect x="68" y="172" width="164" height="46" rx="8" fill="#F0FDF4" stroke="#059669" stroke-width="2"/>
+      <text x="150" y="192" text-anchor="middle" fill="#065F46" font-family="JetBrains Mono,monospace" font-size="11">execute body</text>
+      <text x="150" y="208" text-anchor="middle" fill="#6B7280" font-family="DM Sans,sans-serif" font-size="9">(may update condition here)</text>
+      <!-- loop back -->
+      <line x1="68" y1="195" x2="26" y2="195" stroke="#4F46E5" stroke-width="2"/>
+      <line x1="26" y1="195" x2="26" y2="110" stroke="#4F46E5" stroke-width="2"/>
+      <line x1="26" y1="110" x2="58" y2="110" stroke="#4F46E5" stroke-width="2" marker-end="url(#arr2)"/>
+      <!-- NO right -->
+      <line x1="240" y1="110" x2="278" y2="110" stroke="#DC2626" stroke-width="2"/>
+      <line x1="278" y1="110" x2="278" y2="300" stroke="#DC2626" stroke-width="2"/>
+      <line x1="278" y1="300" x2="206" y2="300" stroke="#DC2626" stroke-width="2" marker-end="url(#arr2)"/>
+      <text x="256" y="100" fill="#DC2626" font-family="DM Sans,sans-serif" font-size="11" font-weight="700">NO</text>
+      <!-- END -->
+      <ellipse cx="150" cy="315" rx="50" ry="20" fill="#1A1A2E"/>
+      <text x="150" y="320" text-anchor="middle" fill="white" font-family="DM Sans,sans-serif" font-size="12" font-weight="700">END</text>
+    </svg>
+  </div>
+
+  <div class="code-wrap">
+    <div class="code-head"><span>All 4 loop types with examples</span><span class="badge">JAVA</span></div>
+    <pre><span class="cm">// ── 1. for loop (you know how many times) ─────────────────</span>
+<span class="kw">for</span> (<span class="tp">int</span> i = <span class="nm">1</span>; i &lt;= <span class="nm">5</span>; i++) {
+    System.out.<span class="mt">println</span>(<span class="st">"i = "</span> + i);     <span class="cm">// prints 1, 2, 3, 4, 5</span>
+}
+
+<span class="cm">// ── 2. while loop (don't know how many times) ─────────────</span>
+<span class="tp">int</span> x = <span class="nm">1</span>;
+<span class="kw">while</span> (x &lt;= <span class="nm">100</span>) {
+    x = x * <span class="nm">2</span>;                           <span class="cm">// 1 → 2 → 4 → 8 → 16 → 32 → 64 → 128</span>
+}
+System.out.<span class="mt">println</span>(x);                   <span class="cm">// → 128</span>
+
+<span class="cm">// ── 3. do-while (must run at least once — great for menus)</span>
+<span class="tp">int</span> choice;
+<span class="kw">do</span> {
+    System.out.<span class="mt">println</span>(<span class="st">"1. Add  2. Remove  3. Quit"</span>);
+    choice = sc.<span class="mt">nextInt</span>();
+} <span class="kw">while</span> (choice != <span class="nm">3</span>);             <span class="cm">// note the semicolon here!</span>
+
+<span class="cm">// ── 4. for-each (read every item in array, nice and clean)</span>
+<span class="tp">int</span>[] marks = {<span class="nm">70</span>, <span class="nm">85</span>, <span class="nm">60</span>, <span class="nm">95</span>};
+<span class="kw">for</span> (<span class="tp">int</span> mark : marks) {             <span class="cm">// reads "for each mark in marks"</span>
+    System.out.<span class="mt">println</span>(mark);
+}
+
+<span class="cm">// ── break (exit loop early) ────────────────────────────────</span>
+<span class="kw">for</span> (<span class="tp">int</span> i = <span class="nm">1</span>; i &lt;= <span class="nm">10</span>; i++) {
+    <span class="kw">if</span> (i == <span class="nm">5</span>) <span class="kw">break</span>;               <span class="cm">// stops at 5, prints 1 2 3 4</span>
+    System.out.<span class="mt">print</span>(i + <span class="st">" "</span>);
+}
+
+<span class="cm">// ── continue (skip one iteration) ─────────────────────────</span>
+<span class="kw">for</span> (<span class="tp">int</span> i = <span class="nm">1</span>; i &lt;= <span class="nm">5</span>; i++) {
+    <span class="kw">if</span> (i == <span class="nm">3</span>) <span class="kw">continue</span>;            <span class="cm">// skips 3, prints 1 2 4 5</span>
+    System.out.<span class="mt">print</span>(i + <span class="st">" "</span>);
+}</pre>
+  </div>
+</section>
+
+<hr class="sec-divider">
+
+<!-- ════════════════════════════════════════
+  ⑧ SWITCH
+════════════════════════════════════════ -->
+<section class="section" id="switch">
+  <div class="sec-label">
+    <div class="sec-num" style="background:var(--c8)">8</div>
+    <div class="sec-title"><small>Multi-branch decisions</small>Switch Statements</div>
+  </div>
+
+  <p>A <code>switch</code> is like a cleaner version of many <code>if-else if</code> statements. Use it when you're testing <strong>one variable against many exact values</strong>.</p>
+
+  <!-- SWITCH FLOWCHART -->
+  <div class="flow-wrap">
+    <div class="flow-title">📊 switch Flowchart — switch(day)</div>
+    <svg class="flow" width="460" height="300" viewBox="0 0 460 300">
+      <defs>
+        <marker id="arr3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="#1A1A2E"/>
+        </marker>
+      </defs>
+      <!-- diamond -->
+      <polygon points="160,40 280,100 160,160 40,100" fill="#FEF3C7" stroke="#D97706" stroke-width="2.5"/>
+      <text x="160" y="95" text-anchor="middle" fill="#92400E" font-family="JetBrains Mono,monospace" font-size="13" font-weight="700">switch(day)</text>
+      <text x="160" y="112" text-anchor="middle" fill="#92400E" font-family="DM Sans,sans-serif" font-size="10">evaluate value</text>
+      <!-- case 1 -->
+      <line x1="100" y1="125" x2="40" y2="175" stroke="#4F46E5" stroke-width="2" marker-end="url(#arr3)"/>
+      <text x="54" y="152" fill="#4F46E5" font-family="DM Sans,sans-serif" font-size="10" font-weight="700">case 1</text>
+      <rect x="0" y="175" width="80" height="36" rx="7" fill="#EEF2FF" stroke="#4F46E5" stroke-width="2"/>
+      <text x="40" y="197" text-anchor="middle" fill="#312E81" font-family="JetBrains Mono,monospace" font-size="10">"Monday"</text>
+      <!-- case 2 -->
+      <line x1="140" y1="158" x2="130" y2="175" stroke="#059669" stroke-width="2" marker-end="url(#arr3)"/>
+      <text x="120" y="170" fill="#059669" font-family="DM Sans,sans-serif" font-size="10" font-weight="700">case 2</text>
+      <rect x="90" y="175" width="80" height="36" rx="7" fill="#F0FDF4" stroke="#059669" stroke-width="2"/>
+      <text x="130" y="197" text-anchor="middle" fill="#065F46" font-family="JetBrains Mono,monospace" font-size="10">"Tuesday"</text>
+      <!-- case 3 -->
+      <line x1="180" y1="158" x2="220" y2="175" stroke="#DC2626" stroke-width="2" marker-end="url(#arr3)"/>
+      <text x="192" y="170" fill="#DC2626" font-family="DM Sans,sans-serif" font-size="10" font-weight="700">case 3</text>
+      <rect x="180" y="175" width="80" height="36" rx="7" fill="#FEF2F2" stroke="#DC2626" stroke-width="2"/>
+      <text x="220" y="197" text-anchor="middle" fill="#7F1D1D" font-family="JetBrains Mono,monospace" font-size="9">"Wednesday"</text>
+      <!-- default -->
+      <line x1="240" y1="120" x2="360" y2="175" stroke="#6B7280" stroke-width="2" marker-end="url(#arr3)"/>
+      <text x="296" y="148" fill="#6B7280" font-family="DM Sans,sans-serif" font-size="10" font-weight="700">default</text>
+      <rect x="320" y="175" width="90" height="36" rx="7" fill="#F9FAFB" stroke="#6B7280" stroke-width="2"/>
+      <text x="365" y="197" text-anchor="middle" fill="#374151" font-family="JetBrains Mono,monospace" font-size="10">"Invalid"</text>
+      <!-- break arrows down -->
+      <line x1="40" y1="211" x2="40" y2="255" stroke="#1A1A2E" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <line x1="130" y1="211" x2="130" y2="255" stroke="#1A1A2E" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <line x1="220" y1="211" x2="220" y2="255" stroke="#1A1A2E" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <line x1="365" y1="211" x2="365" y2="255" stroke="#1A1A2E" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <!-- merge line -->
+      <line x1="40" y1="255" x2="365" y2="255" stroke="#1A1A2E" stroke-width="1.5"/>
+      <line x1="202" y1="255" x2="202" y2="275" stroke="#1A1A2E" stroke-width="1.5" marker-end="url(#arr3)"/>
+      <!-- break labels -->
+      <text x="40" y="250" text-anchor="middle" fill="#EA580C" font-family="JetBrains Mono,monospace" font-size="9">break</text>
+      <text x="130" y="250" text-anchor="middle" fill="#EA580C" font-family="JetBrains Mono,monospace" font-size="9">break</text>
+      <text x="220" y="250" text-anchor="middle" fill="#EA580C" font-family="JetBrains Mono,monospace" font-size="9">break</text>
+      <text x="365" y="250" text-anchor="middle" fill="#EA580C" font-family="JetBrains Mono,monospace" font-size="9">break</text>
+      <!-- END -->
+      <ellipse cx="202" cy="287" rx="46" ry="16" fill="#1A1A2E"/>
+      <text x="202" y="292" text-anchor="middle" fill="white" font-family="DM Sans,sans-serif" font-size="11" font-weight="700">continues...</text>
+    </svg>
+  </div>
+
+  <div class="callout warn">
+    <div class="callout-icon">⚠️</div>
+    <div class="callout-body"><strong>Don't forget <code>break</code>!</strong> Without it, Java keeps running into the next case. This is called "fall-through" and is usually a bug.</div>
+  </div>
+
+  <div class="code-wrap">
+    <div class="code-head"><span>switch examples — int, String, fall-through</span><span class="badge">JAVA</span></div>
+    <pre><span class="cm">// ── switch on int ──────────────────────────────────────────</span>
+<span class="tp">int</span> day = <span class="nm">3</span>;
+<span class="kw">switch</span> (day) {
+    <span class="kw">case</span> <span class="nm">1</span>:  System.out.<span class="mt">println</span>(<span class="st">"Monday"</span>);    <span class="kw">break</span>;
+    <span class="kw">case</span> <span class="nm">2</span>:  System.out.<span class="mt">println</span>(<span class="st">"Tuesday"</span>);   <span class="kw">break</span>;
+    <span class="kw">case</span> <span class="nm">3</span>:  System.out.<span class="mt">println</span>(<span class="st">"Wednesday"</span>); <span class="kw">break</span>;
+    <span class="kw">default</span>: System.out.<span class="mt">println</span>(<span class="st">"Invalid"</span>);   <span class="kw">break</span>;
+}
+<span class="cm">// → Wednesday</span>
+
+<span class="cm">// ── switch on String ───────────────────────────────────────</span>
+<span class="tp">String</span> season = <span class="st">"Winter"</span>;
+<span class="kw">switch</span> (season) {
+    <span class="kw">case</span> <span class="st">"Summer"</span>:  System.out.<span class="mt">println</span>(<span class="st">"Hot!"</span>);   <span class="kw">break</span>;
+    <span class="kw">case</span> <span class="st">"Winter"</span>:  System.out.<span class="mt">println</span>(<span class="st">"Cold!"</span>);  <span class="kw">break</span>;
+    <span class="kw">case</span> <span class="st">"Spring"</span>:
+    <span class="kw">case</span> <span class="st">"Autumn"</span>:  System.out.<span class="mt">println</span>(<span class="st">"Mild"</span>);   <span class="kw">break</span>;
+    <span class="kw">default</span>:        System.out.<span class="mt">println</span>(<span class="st">"Unknown"</span>); <span class="kw">break</span>;
+}
+<span class="cm">// → Cold!</span>
+
+<span class="cm">// ── Useful trick: grade boundaries ────────────────────────</span>
+<span class="tp">char</span> grade = <span class="st">'B'</span>;
+<span class="kw">switch</span> (grade) {
+    <span class="kw">case</span> <span class="st">'A'</span>: System.out.<span class="mt">println</span>(<span class="st">"Excellent!"</span>); <span class="kw">break</span>;
+    <span class="kw">case</span> <span class="st">'B'</span>: System.out.<span class="mt">println</span>(<span class="st">"Good!"</span>);      <span class="kw">break</span>;
+    <span class="kw">case</span> <span class="st">'C'</span>: System.out.<span class="mt">println</span>(<span class="st">"Average"</span>);   <span class="kw">break</span>;
+    <span class="kw">default</span>: System.out.<span class="mt">println</span>(<span class="st">"See teacher"</span>); <span class="kw">break</span>;
+}
+<span class="cm">// → Good!</span></pre>
+  </div>
+</section>
+
+<hr class="sec-divider">
+
+<!-- ════════════════════════════════════════
+  ⑨ MATH FUNCTIONS
+════════════════════════════════════════ -->
+<section class="section" id="math">
+  <div class="sec-label">
+    <div class="sec-num" style="background:var(--c9)">9</div>
+    <div class="sec-title"><small>java.lang.Math</small>Math Functions</div>
+  </div>
+
+  <p>The <code>Math</code> class gives you built-in maths tools. All methods are <strong>static</strong> — call them directly: <code>Math.sqrt(25)</code>. No import needed.</p>
+
+  <!-- MATH VISUAL CARDS -->
+  <div class="diagram">
+    <div class="diagram-title">🧮 Most Important Math Methods</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;">
+      <div style="background:#ECFEFF;border:2px solid var(--c6);border-radius:10px;padding:14px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--c6);font-size:.95rem;">Math.abs(x)</div>
+        <div style="font-size:.83rem;margin:6px 0;color:var(--ink2);">Removes the minus sign</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:.78rem;background:#fff;border-radius:5px;padding:5px 8px;">Math.abs(-7) → <strong>7</strong><br>Math.abs(4) → <strong>4</strong></div>
+      </div>
+      <div style="background:#F0FDF4;border:2px solid var(--c2);border-radius:10px;padding:14px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--c2);font-size:.95rem;">Math.sqrt(x)</div>
+        <div style="font-size:.83rem;margin:6px 0;color:var(--ink2);">Square root of x</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:.78rem;background:#fff;border-radius:5px;padding:5px 8px;">Math.sqrt(25) → <strong>5.0</strong><br>Math.sqrt(2) → <strong>1.414...</strong></div>
+      </div>
+      <div style="background:#EEF2FF;border:2px solid var(--c7);border-radius:10px;padding:14px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--c7);font-size:.95rem;">Math.pow(x, y)</div>
+        <div style="font-size:.83rem;margin:6px 0;color:var(--ink2);">x to the power of y</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:.78rem;background:#fff;border-radius:5px;padding:5px 8px;">Math.pow(2,10) → <strong>1024.0</strong><br>Math.pow(3,3) → <strong>27.0</strong></div>
+      </div>
+      <div style="background:#FEF2F2;border:2px solid var(--c5);border-radius:10px;padding:14px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--c5);font-size:.95rem;">Math.random()</div>
+        <div style="font-size:.83rem;margin:6px 0;color:var(--ink2);">Random decimal 0.0 to 0.999...</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:.78rem;background:#fff;border-radius:5px;padding:5px 8px;">Math.random() → e.g. <strong>0.742</strong></div>
+      </div>
+      <div style="background:#FFFBEB;border:2px solid var(--c4);border-radius:10px;padding:14px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--c4);font-size:.95rem;">Math.round(x)</div>
+        <div style="font-size:.83rem;margin:6px 0;color:var(--ink2);">Round to nearest whole number</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:.78rem;background:#fff;border-radius:5px;padding:5px 8px;">Math.round(4.5) → <strong>5</strong><br>Math.round(4.4) → <strong>4</strong></div>
+      </div>
+      <div style="background:#F5F3FF;border:2px solid var(--c3);border-radius:10px;padding:14px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--c3);font-size:.95rem;">Math.max / min</div>
+        <div style="font-size:.83rem;margin:6px 0;color:var(--ink2);">Bigger or smaller of two values</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:.78rem;background:#fff;border-radius:5px;padding:5px 8px;">Math.max(8,13) → <strong>13</strong><br>Math.min(8,13) → <strong>8</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ceil/floor/round diagram -->
+  <div class="diagram">
+    <div class="diagram-title">📏 ceil vs floor vs round — what's the difference?</div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+      <div style="text-align:center;">
+        <div style="font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--c2);margin-bottom:8px;">Math.ceil()</div>
+        <div style="font-size:.8rem;color:var(--ink2);margin-bottom:8px;">Always rounds UP</div>
+        <div style="background:#F0FDF4;border:2px solid var(--c2);border-radius:8px;padding:10px;font-family:'JetBrains Mono',monospace;font-size:.8rem;">
+          4.1 → 5.0<br>4.9 → 5.0<br>-2.3 → -2.0
+        </div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--c5);margin-bottom:8px;">Math.floor()</div>
+        <div style="font-size:.8rem;color:var(--ink2);margin-bottom:8px;">Always rounds DOWN</div>
+        <div style="background:#FEF2F2;border:2px solid var(--c5);border-radius:8px;padding:10px;font-family:'JetBrains Mono',monospace;font-size:.8rem;">
+          4.1 → 4.0<br>4.9 → 4.0<br>-2.3 → -3.0
+        </div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--c7);margin-bottom:8px;">Math.round()</div>
+        <div style="font-size:.8rem;color:var(--ink2);margin-bottom:8px;">Normal rounding (.5 goes up)</div>
+        <div style="background:#EEF2FF;border:2px solid var(--c7);border-radius:8px;padding:10px;font-family:'JetBrains Mono',monospace;font-size:.8rem;">
+          4.4 → 4<br>4.5 → 5<br>-2.7 → -3
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout exam">
+    <div class="callout-icon">⭐</div>
+    <div class="callout-body"><strong>Random number in a range — memorise this formula:</strong><br>
+    <code>(int)(Math.random() * (max - min + 1)) + min</code><br>
+    Example — dice (1 to 6): <code>(int)(Math.random() * 6) + 1</code></div>
+  </div>
+
+  <div class="code-wrap">
+    <div class="code-head"><span>Math in practice</span><span class="badge">JAVA</span></div>
+    <pre><span class="cm">// Pythagoras: hypotenuse of right triangle</span>
+<span class="tp">double</span> a = <span class="nm">3</span>, b = <span class="nm">4</span>;
+<span class="tp">double</span> c = Math.<span class="mt">sqrt</span>(Math.<span class="mt">pow</span>(a,<span class="nm">2</span>) + Math.<span class="mt">pow</span>(b,<span class="nm">2</span>));
+System.out.<span class="mt">println</span>(c);    <span class="cm">// → 5.0</span>
+
+<span class="cm">// Area of a circle</span>
+<span class="tp">double</span> r    = <span class="nm">7</span>;
+<span class="tp">double</span> area = Math.<span class="mt">PI</span> * Math.<span class="mt">pow</span>(r, <span class="nm">2</span>);
+System.out.<span class="mt">printf</span>(<span class="st">"%.2f%n"</span>, area); <span class="cm">// → 153.94</span>
+
+<span class="cm">// Random dice roll (1 to 6)</span>
+<span class="tp">int</span> dice = (<span class="tp">int</span>)(Math.<span class="mt">random</span>() * <span class="nm">6</span>) + <span class="nm">1</span>;
+
+<span class="cm">// Round a price to 2 decimal places</span>
+<span class="tp">double</span> price   = <span class="nm">19.876</span>;
+<span class="tp">double</span> rounded = Math.<span class="mt">round</span>(price * <span class="nm">100</span>) / <span class="nm">100.0</span>;
+System.out.<span class="mt">println</span>(rounded);    <span class="cm">// → 19.88</span></pre>
+  </div>
+</section>
+
+<hr class="sec-divider">
+
+<!-- ════════════════════════════════════════
+  ⑩ STRING METHODS
+════════════════════════════════════════ -->
+<section class="section" id="strings">
+  <div class="sec-label">
+    <div class="sec-num" style="background:var(--c10)">10</div>
+    <div class="sec-title"><small>java.lang.String</small>String Methods</div>
+  </div>
+
+  <p>A <code>String</code> is an object in Java. It has dozens of built-in methods. <strong>Strings are immutable</strong> — methods don't change the original; they return a new String.</p>
+
+  <!-- STRING INDEX VISUAL -->
+  <div class="diagram">
+    <div class="diagram-title">🔤 String Indexing — "Hello, Java!"</div>
+    <div class="str-visual">
+      <div class="str-cell"><div class="str-box" style="border-color:var(--c10);background:#FDF2F8;color:var(--c10);">H</div><div class="str-idx">0</div></div>
+      <div class="str-cell"><div class="str-box" style="border-color:var(--c10);background:#FDF2F8;color:var(--c10);">e</div><div class="str-idx">1</div></div>
+      <div class="str-cell"><div class="str-box" style="border-color:var(--c10);background:#FDF2F8;color:var(--c10);">l</div><div class="str-idx">2</div></div>
+      <div class="str-cell"><div class="str-box" style="border-color:var(--c10);background:#FDF2F8;color:var(--c10);">l</div><div class="str-idx">3</div></div>
+      <div class="str-cell"><div class="str-box" style="border-color:var(--c10);background:#FDF2F8;color:var(--c10);">o</div><div class="str-idx">4</div></div>
+      <div class="str-cell"><div class="str-box" style="border-color:var(--border);background:#F7F5F0;">,</div><div class="str-idx">5</div></div>
+      <div class="str-cell"><div class="str-box" style="border-color:var(--border);background:#F7F5F0;">&nbsp;</div><div class="str-idx">6</div></div>
+      <div class="str-cell"><div class="str-box" style="border-color:var(--c7);background:#EEF2FF;color:var(--c7);">J</div><div class="str-idx">7</div></div>
+      <div class="str-cell"><div class="str-box" style="border-color:var(--c7);background:#EEF2FF;color:var(--c7);">a</div><div class="str-idx">8</div></div>
+      <div class="str-cell"><div class="str-box" style="border-color:var(--c7);background:#EEF2FF;color:var(--c7);">v</div><div class="str-idx">9</div></div>
+      <div class="str-cell"><div class="str-box" style="border-color:var(--c7);background:#EEF2FF;color:var(--c7);">a</div><div class="str-idx">10</div></div>
+      <div class="str-cell"><div class="str-box" style="border-color:var(--border);background:#F7F5F0;">!</div><div class="str-idx">11</div></div>
+    </div>
+    <div style="display:flex;gap:20px;margin-top:14px;flex-wrap:wrap;font-size:.83rem;">
+      <div><code>.charAt(0)</code> → <strong style="color:var(--c10);">'H'</strong></div>
+      <div><code>.charAt(11)</code> → <strong>'!'</strong></div>
+      <div><code>.substring(7)</code> → <strong style="color:var(--c7);">"Java!"</strong></div>
+      <div><code>.substring(0,5)</code> → <strong style="color:var(--c10);">"Hello"</strong></div>
+      <div><code>.length()</code> → <strong>12</strong></div>
+    </div>
+  </div>
+
+  <!-- METHOD TABLE -->
+  <table class="ref-table">
+    <tr><th>Method</th><th>What it does</th><th>Example → Result</th></tr>
+    <tr><td>.length()</td><td>Number of characters</td><td>"Hello".length() → 5</td></tr>
+    <tr><td>.charAt(i)</td><td>Character at position i (starts at 0)</td><td>"Hello".charAt(1) → 'e'</td></tr>
+    <tr><td>.substring(s)</td><td>From position s to the end</td><td>"Hello".substring(2) → "llo"</td></tr>
+    <tr><td>.substring(s,e)</td><td>From s up to (not including) e</td><td>"Hello".substring(1,4) → "ell"</td></tr>
+    <tr><td>.indexOf(s)</td><td>First position of s. Returns -1 if not found</td><td>"Hello".indexOf("ll") → 2</td></tr>
+    <tr><td>.contains(s)</td><td>true if s is anywhere in the string</td><td>"Hello".contains("ell") → true</td></tr>
+    <tr><td>.toUpperCase()</td><td>ALL CAPS</td><td>"hello".toUpperCase() → "HELLO"</td></tr>
+    <tr><td>.toLowerCase()</td><td>all lowercase</td><td>"HELLO".toLowerCase() → "hello"</td></tr>
+    <tr><td>.trim()</td><td>Remove spaces at start and end</td><td>"  hi  ".trim() → "hi"</td></tr>
+    <tr><td>.replace(old,new)</td><td>Replace every occurrence of old with new</td><td>"aabaa".replace("a","x") → "xxbxx"</td></tr>
+    <tr><td>.equals(s)</td><td>true if same text (case-sensitive)</td><td>"Hi".equals("hi") → false</td></tr>
+    <tr><td>.equalsIgnoreCase(s)</td><td>true if same text (ignoring caps)</td><td>"Hi".equalsIgnoreCase("hi") → true</td></tr>
+    <tr><td>.startsWith(s)</td><td>true if begins with s</td><td>"Hello".startsWith("He") → true</td></tr>
+    <tr><td>.endsWith(s)</td><td>true if ends with s</td><td>"Hello".endsWith("lo") → true</td></tr>
+    <tr><td>.split(sep)</td><td>Split into an array of parts</td><td>"a,b,c".split(",") → ["a","b","c"]</td></tr>
+  </table>
+
+  <!-- GOOD/BAD COMPARE -->
+  <h3 style="font-family:'Fraunces',serif;font-size:1.3rem;margin:28px 0 10px;">⚠️ The #1 String Mistake</h3>
+  <div class="compare">
+    <div class="compare-box bad">
+      <div class="compare-head">❌ WRONG — never do this</div>
+      <div class="compare-body">
+<pre><span class="tp">String</span> a = <span class="st">"hello"</span>;
+<span class="tp">String</span> b = <span class="st">"hello"</span>;
+
+<span class="kw">if</span> (a == b) {       <span class="cm">// ← WRONG!</span>
+    <span class="cm">// == compares memory</span>
+    <span class="cm">// addresses, not text</span>
+}</pre>
+      </div>
+    </div>
+    <div class="compare-box good">
+      <div class="compare-head">✅ CORRECT — always use .equals()</div>
+      <div class="compare-body">
+<pre><span class="tp">String</span> a = <span class="st">"hello"</span>;
+<span class="tp">String</span> b = <span class="st">"hello"</span>;
+
+<span class="kw">if</span> (a.<span class="mt">equals</span>(b)) {  <span class="cm">// ← CORRECT</span>
+    <span class="cm">// compares the actual</span>
+    <span class="cm">// text content</span>
+}</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="code-wrap">
+    <div class="code-head"><span>String methods in action — common exam patterns</span><span class="badge">JAVA</span></div>
+    <pre><span class="tp">String</span> s = <span class="st">"Hello, World!"</span>;
+
+<span class="cm">// charAt — get a single character</span>
+<span class="tp">char</span> first = s.<span class="mt">charAt</span>(<span class="nm">0</span>);                    <span class="cm">// → 'H'</span>
+<span class="tp">char</span> last  = s.<span class="mt">charAt</span>(s.<span class="mt">length</span>() - <span class="nm">1</span>);      <span class="cm">// → '!'</span>
+
+<span class="cm">// substring — extract part of a string</span>
+System.out.<span class="mt">println</span>(s.<span class="mt">substring</span>(<span class="nm">7</span>));          <span class="cm">// → "World!"</span>
+System.out.<span class="mt">println</span>(s.<span class="mt">substring</span>(<span class="nm">7</span>, <span class="nm">12</span>));     <span class="cm">// → "World"</span>
+
+<span class="cm">// Count vowels using a loop + charAt</span>
+<span class="tp">int</span> count = <span class="nm">0</span>;
+<span class="kw">for</span> (<span class="tp">int</span> i = <span class="nm">0</span>; i &lt; s.<span class="mt">length</span>(); i++) {
+    <span class="tp">char</span> ch = s.<span class="mt">charAt</span>(i);
+    <span class="kw">if</span> (<span class="st">"aeiouAEIOU"</span>.<span class="mt">contains</span>(<span class="tp">String</span>.<span class="mt">valueOf</span>(ch))) {
+        count++;
+    }
+}
+System.out.<span class="mt">println</span>(<span class="st">"Vowels: "</span> + count);   <span class="cm">// → 3</span>
+
+<span class="cm">// Get initials from a full name</span>
+<span class="tp">String</span> name  = <span class="st">"John Michael Smith"</span>;
+<span class="tp">String</span>[] parts = name.<span class="mt">split</span>(<span class="st">" "</span>);
+<span class="tp">String</span> initials = <span class="st">""</span>;
+<span class="kw">for</span> (<span class="tp">String</span> part : parts) {
+    initials += part.<span class="mt">charAt</span>(<span class="nm">0</span>);
+}
+System.out.<span class="mt">println</span>(initials);   <span class="cm">// → "JMS"</span>
+
+<span class="cm">// Reverse a string</span>
+<span class="tp">String</span> word = <span class="st">"hello"</span>;
+<span class="tp">String</span> rev  = <span class="kw">new</span> <span class="cl">StringBuilder</span>(word).<span class="mt">reverse</span>().<span class="mt">toString</span>();
+System.out.<span class="mt">println</span>(rev);    <span class="cm">// → "olleh"</span>
+
+<span class="cm">// Convert string to int (and back)</span>
+<span class="tp">int</span>    num = Integer.<span class="mt">parseInt</span>(<span class="st">"42"</span>);    <span class="cm">// String → int</span>
+<span class="tp">String</span> str = <span class="tp">String</span>.<span class="mt">valueOf</span>(<span class="nm">42</span>);         <span class="cm">// int → String</span></pre>
+  </div>
+</section>
+
+<hr class="sec-divider">
+
+<!-- QUICK CHEAT SHEET -->
+<section class="section" id="cheatsheet">
+  <div class="sec-label">
+    <div class="sec-num" style="background:var(--ink)">★</div>
+    <div class="sec-title"><small>Before your exam</small>Quick Cheat Sheet</div>
+  </div>
+
+  <div class="diagram">
+    <div class="diagram-title">✅ 10 Things to Always Remember in the Exam</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num" style="background:var(--c2)">1</div>
+        <div class="step-body"><h4>Fields must always be <code>private</code></h4><p>Apply encapsulation — use getters and setters to access them.</p></div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:var(--c1)">2</div>
+        <div class="step-body"><h4>Constructor = same name as class, no return type</h4><p>Called with <code>new ClassName()</code>. Sets the fields using <code>this.field = param</code>.</p></div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:var(--c3)">3</div>
+        <div class="step-body"><h4><code>super()</code> must be the first line of a child constructor</h4><p>Always required in inheritance when the parent has a constructor.</p></div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:var(--c10)">4</div>
+        <div class="step-body"><h4>Use <code>.equals()</code> for Strings, never <code>==</code></h4><p><code>==</code> compares memory addresses. <code>.equals()</code> compares the actual text.</p></div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:var(--c5)">5</div>
+        <div class="step-body"><h4>Array index starts at 0, last index = length − 1</h4><p>An array of 5 elements has indices 0, 1, 2, 3, 4.</p></div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:var(--c6)">6</div>
+        <div class="step-body"><h4>Create each object in an array of objects separately</h4><p><code>new Student[3]</code> gives 3 null slots. You must fill each with <code>new Student(...)</code>.</p></div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:var(--c7)">7</div>
+        <div class="step-body"><h4>Don't forget <code>break</code> in every switch case</h4><p>Without break, Java falls through to the next case — usually a bug.</p></div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:var(--c9)">8</div>
+        <div class="step-body"><h4>Random number formula: <code>(int)(Math.random() * range) + min</code></h4><p>Dice = <code>(int)(Math.random() * 6) + 1</code>. Range = max − min + 1.</p></div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:var(--c8)">9</div>
+        <div class="step-body"><h4><code>substring(s, e)</code>: s is included, e is NOT</h4><p>"Hello".substring(1, 4) gives "ell" — stops just before index 4.</p></div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:var(--c4)">10</div>
+        <div class="step-body"><h4>Cast to <code>double</code> when dividing for a decimal result</h4><p><code>10 / 3 = 3</code> (int division). <code>(double)10 / 3 = 3.333</code> (correct).</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DATA TYPES TABLE -->
+  <h3 style="font-family:'Fraunces',serif;font-size:1.3rem;margin:28px 0 12px;">Java Primitive Data Types</h3>
+  <table class="ref-table">
+    <tr><th>Type</th><th>What it stores</th><th>Example values</th></tr>
+    <tr><td>int</td><td>Whole numbers (no decimal)</td><td>42, -7, 0, 1000</td></tr>
+    <tr><td>double</td><td>Decimal numbers</td><td>3.14, -0.5, 99.9</td></tr>
+    <tr><td>boolean</td><td>True or false only</td><td>true, false</td></tr>
+    <tr><td>char</td><td>One character (single quotes)</td><td>'A', 'z', '5', ' '</td></tr>
+    <tr><td>String</td><td>Text (double quotes) — actually an object</td><td>"Hello", "Java"</td></tr>
+    <tr><td>long</td><td>Very large whole numbers</td><td>9999999999L</td></tr>
+  </table>
+
+  <h3 style="font-family:'Fraunces',serif;font-size:1.3rem;margin:28px 0 12px;">Useful Operators</h3>
+  <table class="ref-table">
+    <tr><th>Operator</th><th>Meaning</th><th>Example</th></tr>
+    <tr><td>%</td><td>Remainder (modulo)</td><td>10 % 3 → 1</td></tr>
+    <tr><td>++</td><td>Add 1</td><td>i++ or ++i</td></tr>
+    <tr><td>--</td><td>Subtract 1</td><td>i-- or --i</td></tr>
+    <tr><td>+=</td><td>Add and save</td><td>x += 5 means x = x + 5</td></tr>
+    <tr><td>&&</td><td>AND — both must be true</td><td>age > 0 && age &lt; 120</td></tr>
+    <tr><td>||</td><td>OR — at least one must be true</td><td>x == 0 || y == 0</td></tr>
+    <tr><td>!</td><td>NOT — flips true/false</td><td>!true → false</td></tr>
+    <tr><td>(int)</td><td>Cast — convert to int (truncates)</td><td>(int)3.9 → 3</td></tr>
+    <tr><td>(double)</td><td>Cast — convert to double</td><td>(double)5/2 → 2.5</td></tr>
+  </table>
+
+  <div style="margin-top:40px;text-align:center;padding:28px;background:#F7F5F0;border-radius:14px;border:2px dashed var(--border);">
+    <div style="font-size:2rem;">🎯</div>
+    <div style="font-family:'Fraunces',serif;font-size:1.4rem;font-weight:900;margin:8px 0;">Good luck, Doron!</div>
+    <div style="color:var(--ink2);font-size:.95rem;">You've got this. Practice the code examples, draw the diagrams from memory, and you'll ace it.</div>
+  </div>
+</section>
+
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// progress bar
+const prog = document.getElementById('prog');
+window.addEventListener('scroll', () => {
+  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+  prog.style.width = pct + '%';
+  document.getElementById('scrollTop').style.display = window.scrollY > 300 ? 'flex' : 'none';
+});
+
+// active nav link highlight
+const sections = document.querySelectorAll('section.section[id]');
+const navLinks  = document.querySelectorAll('#topnav a');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(l => l.style.background = '');
+      const a = document.querySelector(`#topnav a[href="#${e.target.id}"]`);
+      if (a) a.style.background = '#E2DED6';
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px' });
+sections.forEach(s => io.observe(s));
+</script>
+</body>
+</html>
